@@ -1,0 +1,29 @@
+
+
+
+
+img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+/* Style the font properties of td elements */
+#myTable td {
+  font-style: Arial;
+  font-size: 15px;
+  font-weight: bold;
+  color: #080808;
+}
+
+#myTable th {
+  background-color: #045511;
+  color: #fff;
+  text-align: center;
+  line-height: 30px;
+  font-size: 15px;
+  
+}
+
+
+
+  

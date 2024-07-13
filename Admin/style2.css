@@ -1,0 +1,345 @@
+body {
+    font-family: Cambria, sans-serif;
+  }
+  
+  .modal h2,
+  .modal label,
+  .modal input,
+  .modal button {
+    font-family: Cambria, sans-serif;
+  
+  }
+  
+
+
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: none; /* Initially hidden */
+    justify-content: center;
+    align-items: center;
+    border-color:black;
+
+  }
+  
+   .modal {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    border-color: black;
+    border: 20px;
+    width: 80%;
+    height: 80%;
+    max-width: 1500px; /* Limit the maximum width */
+    max-height: 1500px; /* Limit the maximum height */
+    overflow-y: auto; /* Add vertical scrollbar if content exceeds height */
+  }
+  
+  
+  .modal-content {
+    overflow: hidden; /* Hide overflow content beyond the modal */
+  }
+  
+  .modal-layer {
+    margin-bottom: 20px; /* Add margin between layers */
+  }
+
+  .close-button {
+    position: absolute;
+    top: 100px;
+    right: 100px;
+    cursor: pointer;
+  }
+  
+
+  .inline-buttons {
+    /* Add styles for your button here */
+    display: flex; /* Set the container to flex */
+    justify-content: right;
+    margin-right: 5%;
+    gap: 2%; 
+  }
+
+
+  .inline-button {
+    border-radius: 100px;
+    border: none;
+    padding: 10px;
+    background-color: transparent; /* Remove background color */
+    /* Add other styles for your button here */
+  }
+  
+
+.inline-button:hover {
+    background-color: transparent;
+    border-radius: 100px;
+}
+
+
+
+  form {
+    border: 2px solid black; /* Add border to the form */
+    padding: 20px; /* Add padding to create space between content and border */
+}
+
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+}
+
+
+
+/* Base styles for input elements */
+input[type="text"],
+input[type="date"],
+input[type="password"],
+input[type="number"],
+input[type="email"],
+input[type="file"],
+select,textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #050505;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+    transition: box-shadow 0.3s ease;
+}
+
+/* Neon glow effect on hover */
+/* Base styles for input elements */
+/* Base styles for input elements */
+/* Base styles for input elements */
+input[type="text"],
+input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #000000;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+
+
+
+input[type="text"].searchmember,
+input[type="date"].searchmember,
+select.searchmember {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #000000;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+    
+}
+
+
+.centered button {
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: #fff;
+  width: 30%; /* Adjust width as needed */
+  margin: 0 auto; /* Center-align the button */
+  transition: background-color 0.3s ease; /* Add transition for smooth effect */
+}
+
+.centered button:hover {
+  background-color: #218838; /* Dark green color on hover */
+}
+
+
+.centered {
+  width: 50%; /* Adjust width as needed */
+  margin: 0 auto; /* This will center-align the div */
+  border: 1px solid #000; /* Just for visualization */
+  padding: 20px; /* Adjust padding as needed */
+  box-sizing: border-box; /* Include padding and border in the width */
+  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1), inset 0 -10px 20px rgba(0, 0, 0, 0.1); /* 3D-style effect */
+}
+
+
+.centeredverified {
+  width: 80%; /* Adjust width as needed */
+  margin: 0 auto; /* This will center-align the div */
+  border: 1px solid #000; /* Just for visualization */
+  padding: 20px; /* Adjust padding as needed */
+  box-sizing: border-box; /* Include padding and border in the width */
+  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1), inset 0 -10px 20px rgba(0, 0, 0, 0.1); /* 3D-style effect */
+}
+
+
+
+
+
+
+/* Neon glow effect on focus */
+input[type="text"]:focus,
+input[type="date"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus,
+select:focus {
+    outline: none;
+    border-color: #46dffa;
+    box-shadow: 0 0 10px #06e2ff;
+}
+
+.input-container {
+  position: relative;
+}
+
+
+.input-container {
+  position: relative;
+}
+
+
+
+#searchInput {
+  padding-right: 30px;
+  border-radius: 50px;
+  border: none;
+  background-color: transparent;
+  width: 120px;
+  height: 60px;
+  transition: width 0.3s ease; /* Adding transition effect */
+}
+
+.search-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+}
+
+#searchInput:focus {
+  width: 500px;
+  background-color: none;
+  font-size: 30px;
+   /* Adjust this value according to the width of your icon */
+}
+
+
+
+.input-text {
+  font-size: 500px;
+  border-color: #555; /* Adjust the font size as needed */
+}
+
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+
+.btn-container {
+  display: flex; /* Set the container to flex */
+  justify-content: center;
+  gap: 2%; /* Center-align items within the container */
+}
+
+.btn-success,
+.btn-secondary {
+  padding: 10px 20px; /* Adjust padding if necessary */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-success {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.btn-secondary {
+  background-color: #e71259;
+  color: #fff;
+}
+
+
+.btn-secondary:hover,
+.btn-success:hover {
+    background-color: #555;
+}
+
+.indented-line {
+  position: relative;
+  margin-top: 20px; /* Adjust the margin as needed */
+}
+.indented-line::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%; /* Adjust the width to change the amount of indentation */
+  height: 2px; /* Adjust the thickness of the line */
+  background-color: black; /* Change the color of the line */
+  transform: translateY(-50%);
+}
+
+
+.titlehead {
+  display: flex;
+  justify-content: center; /* Center content horizontally */
+}
+
+
+
+.choosebranch {
+  display: flex;
+  width: 95%;
+}
+
+.choosebranch .form-group {
+  margin-left: auto;
+  width: 300px;
+}
+
+
+
+
+
+.containerx {
+  display: flex;
+  height: 100%;
+}
+
+.left-container, .right-container {
+  flex: 1;
+  display: inline-block;
+}
+
+.left-container {
+  background-color: lightblue;
+  padding: 10px;
+  height: 100%;
+}
+
+.right-container {
+  background-color: lightgreen;
+  padding: 10px;
+    height: 100%;
+}
+
+
+
+.text-center {
+  text-align: center;
+}

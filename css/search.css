@@ -1,0 +1,56 @@
+.wrap {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .col {
+    flex: 1;
+    margin-right: 0px;
+  }
+  
+  .search {
+    display: flex;
+    align-items: center;
+  }
+  
+  .searchTerm {
+    width: 100%;
+    border: 3px solid #4BC567;
+    border-right: none;
+    padding: 0px;
+    height: 35px;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+    color: #4BC567;
+  }
+  
+  .searchTerm:focus{
+    color: #4BC567;
+  }
+  
+  .searchButton {
+    width: 40px;
+    height: 36px;
+    border: 1px solid #4BC567;
+    background: #4BC567;
+    text-align: center;
+    color: #fff;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    font-size: 20px;
+  }
+  
+  .buttons {
+    display: flex;
+    align-items: center;
+  }
+  
+  .buttons a, .buttons i {
+    margin-left: 10px;
+  }
