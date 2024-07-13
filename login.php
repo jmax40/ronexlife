@@ -15,7 +15,7 @@ if (isset($_POST['login'])) {
         if ($row['position'] == "BS") {
             header('location: BS/index.php');
         } elseif ($row['position'] == "Admin") {
-            header('location: Admin/dashboard.php');
+            header('location: rl_admin/dashboard.php');
         } elseif ($row['position'] == "Manager") {
             header('location: MANAGER/indexM.php');
         }
