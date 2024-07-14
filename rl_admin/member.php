@@ -1,3 +1,47 @@
+
+<?php
+// Database connection parameters
+$servername = "localhost";
+$username = "root";
+$password = "123456";
+$dbname = "db_ronex";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Query to fetch data from promo table
+$sql = "SELECT productname FROM promo";
+$result = $conn->query($sql);
+
+$data = array();
+
+if ($result->num_rows > 0) {
+    // Fetch all rows into $data array
+    while ($row = $result->fetch_assoc()) {
+        $data[] = $row['productname'];
+    }
+}
+
+// Close connection
+$conn->close();
+?>
+
+
+
+
+
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <!-- Created by CodingLab |www.youtube.com/CodingLabYT-->
 <html lang="en" dir="ltr">
@@ -10,6 +54,10 @@
 
 
 <script src="script.js"></script>
+<script src="pyscript/fetch.js"></script>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <!-- Boxiocns CDN Link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-wvfXpqpZZVQGK6q3SN5GnvJFrbg3Io9gWxBjVlqMYkg7J1J7XdbnHJdT9K3bNkN" crossorigin="anonymous">
@@ -25,6 +73,9 @@
 </style>
 
 <body>
+
+
+
   <div class="sidebar close">
     <div class="logo-details">
       <i class='bx bxl-c-plus-plus'></i>
@@ -152,10 +203,7 @@
     <br>
     <div class="inline-buttons">
   
-    <div class="input-container">
-  <input type="text" id="searchInput" placeholder="Search">
-  <img src="../img/icons/search.ico" alt="Search Icon" class="search-icon">
-</div>
+  
 
     <button class="inline-button" id="addButton">Add Client<img src="../img/icons/add.ico" alt="Edit Icon" width="30" height="30"></button>
   <button class="inline-button" id="excelButton">Report<img src="../img/icons/excel.ico" alt="Edit Icon" width="30" height="30" ></i></button>
@@ -304,13 +352,22 @@
   <div id="overlay" class="overlay">
   <div class="modal">
     <div class="modal-content">
-      <form method="post" action="Maharlika.php" enctype='multipart/form-data'>
+      <form method="post"  enctype='multipart/form-data'>
         <div class="modal-layer">
     
-          <div class="form-group">
-            <label for="product">Product: *</label>
-            <input type="text"   class="form-control" id="product" name="product" required>
-          </div>
+
+        <div class="form-group">
+        <label for="productSelect">Select Product:</label>
+        <select id="productSelect" name="productSelect" class="form-control" required>
+            <?php
+            foreach ($data as $productname) {
+                echo '<option value="' . htmlspecialchars($productname) . '">' . htmlspecialchars($productname) . '</option>';
+            }
+            ?>
+        </select>
+    </div>
+       
+
           <div class="form-group">
             <label for="effectDate">Effect Date: *</label>
             <input type="date" class="form-control" id="effectDate" name="effectDate" required>

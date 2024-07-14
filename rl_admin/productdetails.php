@@ -83,8 +83,7 @@ $conn->close();
 <body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="pyscript/script.js"></script>
-
-
+<script src="pyscript/add.js"></script>
 
 
 
@@ -221,56 +220,47 @@ $conn->close();
   
 
 
-    <div class="modal-content">
+ 
 
-      <form method="post" action="Maharlika.php" enctype='multipart/form-data'>
-        <div class="modal-layer">
-    
-          <div class="form-group">
-            <label for="product">Name of MOP: *</label>
-            <input type="text"   class="form-control" id="product" name="product" required>
-          </div>
+    <form id="mopForm" method="POST"  enctype="multipart/form-data">
+    <input type="hidden" class="form-control" value="<?php echo htmlspecialchars($pin); ?>" id="pin" name="pin" required>
 
-          <div class="form-group">
-            <label for="product">Increment ID: *</label>
-            <input type="text"   class="form-control" id="product" name="product" required>
-          </div>
-
-          <div class="form-group">
-            <label for="effectDate">Price of Mop: *</label>
-            <input type="text" class="form-control" id="effectDate" name="effectDate" required>
-          </div>
-
-          <div class="form-group">
-            <label for="effectDate">MOP Days: *</label>
-            <input type="number" class="form-control" id="effectDate" name="effectDate" required>
-          </div>
-
-
-          <div class="form-group">
-  <label for="coordinator">Status:</label>
-  <select class="form-control" id="coordinator" name="coordinator">
-    <option value="promo">Beneficiary</option>
-    <option value="primary">Claimants</option>
-  </select>
-
-
-</div>
-
-        </div>
-
-       
-        <br>
-        <br>
-        
-        <div class="btn-container">
-        <button type="submit" class="btn btn-success">Create</button>
-        <button type="button"  id="closeButton" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-        </div>
-
-      </form>
+    <div class="form-group-mop">
+        <label for="mop">Name of MOP: *</label>
+        <input type="text" class="form-control" id="mop" name="mop" required>
     </div>
-  </div>
+
+    <div class="form-group-mop">
+        <label for="startid">Increment ID: *</label>
+        <input type="text" class="form-control" id="startid" name="startid" required>
+    </div>
+
+    <div class="form-group-mop">
+        <label for="price">Price of Mop: *</label>
+        <input type="text" class="form-control" id="price" name="price" required>
+    </div>
+
+    <div class="form-group-mop">
+        <label for="days">MOP Days: *</label>
+        <input type="number" class="form-control" id="days" name="days" required>
+    </div>
+
+    <div class="form-group-mop">
+        <label for="status">Status:</label>
+        <select class="form-control" id="status" name="status">
+            <option value="promo">Beneficiary</option>
+            <option value="primary">Claimants</option>
+        </select>
+    </div>
+
+    <div class="btn-container">
+        <button type="button" class="btn btn-success" onclick="savemop()">Create</button>
+        <button type="button" id="closeButton" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+    </div>
+</form>
+
+
+ 
 
 
 

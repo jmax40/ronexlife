@@ -29,6 +29,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="pyscript/script.js"></script>
 <script src="pyscript/fetch.js"></script>
+<script src="pyscript/add.js"></script>
 
 
 
@@ -192,45 +193,38 @@
   </section>
 
   <div id="overlay" class="overlay">
-  <div class="modal">
+  <div class="modalv2">
     <div class="modal-content">
     <center> <h1>Product Information <h1>  </center>
-
-      <form method="post" action="Maharlika.php" enctype='multipart/form-data'>
-        <div class="modal-layer">
     
-          <div class="form-group">
+    <form method="post" enctype='multipart/form-data'>
+    <div class="modal-layer">
+        <div class="form-group">
             <label for="product">Product ID: *</label>
-            <input type="text"   class="form-control" id="product" name="product" required>
-          </div>
-          <div class="form-group">
+            <input type="text" class="form-control" id="pin" name="pin" required>
+        </div>
+        <div class="form-group">
             <label for="effectDate">Product Name: *</label>
-            <input type="text" class="form-control" id="effectDate" name="effectDate" required>
-          </div>
-
-          <div class="form-group">
-  <label for="coordinator">Status:</label>
-  <select class="form-control" id="coordinator" name="coordinator">
-    <option value="promo">Primary</option>
-    <option value="primary">Promo</option>
-  </select>
-
-
-
-</div>
-
+            <input type="text" class="form-control" id="productname" name="productname" required>
         </div>
-
-       
-        <br>
-        <br>
-        
-        <div class="btn-container">
-        <button type="submit" class="btn btn-success">Create</button>
-        <button type="button"  id="closeButton" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <div class="form-group">
+            <label for="coordinator">Status:</label>
+            <select class="form-control" id="status" name="status">
+                <option value="promo">Promo</option>
+                <option value="primary">Primary</option>
+            </select>
         </div>
+    </div>
+    <br><br>
+    <div class="btn-container">
+        <button type="button" class="btn btn-success" id="checkout" onclick="saveproduct()">Create</button>
+        <button type="button" id="closeButton" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+    </div>
+</form>
 
-      </form>
+
+
+
     </div>
   </div>
 </div>
