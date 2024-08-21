@@ -13,24 +13,21 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Check if the request method is MOPSAVE (custom method name)
+// Check if the request method is POST
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Retrieve form data
-    $pin = $_POST['pin'];
-    $startid = $_POST['startid'];
-    $mop = $_POST['mop'];
-    $price = $_POST['price'];
-    $days = $_POST['days'];
-    $status = $_POST['status'];
+    // Retrieve and sanitize form data
+    $pin = $conn->real_escape_string($_POST['pin']);
+    $startid = $conn->real_escape_string($_POST['startid']);
+    $mop = $conn->real_escape_string($_POST['mop']);
+    $price = floatval($_POST['price']);
+    $days = intval($_POST['days']);
+    $commission = $conn->real_escape_string($_POST['commission']);
+    $moc = $conn->real_escape_string($_POST['moc']);
+    $status = $conn->real_escape_string($_POST['status']);
     
-    
-    
-    
-    ['status'];
-
     // Prepare and bind parameters (to prevent SQL injection)
-    $stmt = $conn->prepare("INSERT INTO mop (pin, startid, mop, price, days, status) VALUES (?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssssss", $pin, $startid, $mop, $price, $days, $status);
+    $stmt = $conn->prepare("INSERT INTO mop (pin, startid, mop, price, days, commission, moc, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssssssss", $pin, $startid, $mop, $price, $days, $commission, $moc, $status);
 
     if ($stmt->execute()) {
         // If insertion is successful
@@ -41,6 +38,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             'mop' => $mop,
             'price' => $price,
             'days' => $days,
+            'commission' => $commission,
+            'moc' => $moc,
             'status' => $status
         ];
     } else {

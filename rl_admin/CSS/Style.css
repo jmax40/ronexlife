@@ -17,3 +17,31 @@ text-align: center;
 
 
 }
+
+
+.image-container {
+    background-color: #f0f0f0; /* Light gray background */
+    padding: 10px; /* Space around the image */
+    display: inline-block; /* Container size fits content */
+    border: 1px solid #ccc; /* Light gray border */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+  }
+  
+  .image-container img {
+    display: block; /* Prevents extra space below the image */
+    max-width: 100%; /* Scales image to fit container */
+    height: auto; /* Maintains aspect ratio */
+  }
+
+
+
+  .button-container {
+    text-align: right; /* Aligns buttons to the left */
+}
+
+
+
+.inline-button img {
+    vertical-align: middle; /* Aligns the icon vertically with the text */
+    margin-left: 8px; /* Adds space between text and icon */
+}

@@ -22,8 +22,7 @@ function saveproduct() {
 }
 
 
-
-
+    
 
 function savemop() {
     // Gather form data
@@ -31,21 +30,26 @@ function savemop() {
         pin: $('#pin').val(),
         mop: $('#mop').val(),
         startid: $('#startid').val(),
-        price: $('#price').val(),
-        days: $('#days').val(),
+        price: parseFloat($('#price').val()),
+        days: parseInt($('#days').val(), 10),
+        commission: $('#commission').val(),
+        moc: $('#moc').val(),
         status: $('#status').val()
     };
 
-    // AJAX request with custom method 'MOPSAVE'
+    // AJAX request with POST method
     $.ajax({
         url: 'process/add.php',
         type: 'POST',
         data: formData,
         success: function(response) {
-            alert("Successfully Saved!");
-            // Reload the page
-            location.reload();
-            // Optionally reset form fields or perform other actions after successful submission
+            if(response.status === 'success') {
+                alert("Successfully Added");
+                // Reload the page
+                location.reload();
+            } else {
+                alert("Error: " + response.message);
+            }
         },
         error: function(xhr, status, error) {
             console.error(xhr.responseText);
@@ -53,4 +57,5 @@ function savemop() {
         }
     });
 }
+
 

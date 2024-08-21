@@ -23,7 +23,7 @@ $data = array();
 if ($type === 'promo') {
     $sql = "SELECT pin, productname, status FROM promo";
 } elseif ($type === 'mop') {
-    $sql = "SELECT startid, mop, price, days, status FROM mop";
+    $sql = "SELECT startid, mop, price, days, commission, moc, status FROM mop";
 }
 
 if ($sql !== '') {

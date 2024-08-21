@@ -69,6 +69,8 @@ $(document).ready(function(){
                     tr.append($('<td>').text(row.mop));
                     tr.append($('<td>').text(row.price));
                     tr.append($('<td>').text(row.days));
+                    tr.append($('<td>').text(row.commission));
+                    tr.append($('<td>').text(row.moc));
                     tr.append($('<td>').text(row.status));
 
                     $('#modtable tbody').append(tr);
@@ -84,8 +86,19 @@ $(document).ready(function(){
     fetchProductDetails();
 
     // Set interval to fetch data and update table every 5 seconds
-    setInterval(fetchProductDetails, 5000);
+    setInterval(fetchProductDetails, 1000);
 });
+
+
+
+
+
+
+
+
+
+
+
 
 
 

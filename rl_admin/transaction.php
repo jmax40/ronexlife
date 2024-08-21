@@ -237,10 +237,12 @@
             <label for="product">Product: *</label>
             <input type="text"   class="form-control" id="product" name="product" required>
           </div>
+          
           <div class="form-group">
             <label for="effectDate">Effect Date: *</label>
             <input type="date" class="form-control" id="effectDate" name="effectDate" required>
           </div>
+
           <div class="form-group">
             <label for="coordinator">Coordinator:</label>
             <input type="text" class="form-control" id="coordinator" name="coordinator">

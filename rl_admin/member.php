@@ -15,7 +15,7 @@ if ($conn->connect_error) {
 }
 
 // Query to fetch data from promo table
-$sql = "SELECT productname FROM promo";
+$sql = "SELECT productname, pin FROM promo";
 $result = $conn->query($sql);
 
 $data = array();
@@ -23,7 +23,7 @@ $data = array();
 if ($result->num_rows > 0) {
     // Fetch all rows into $data array
     while ($row = $result->fetch_assoc()) {
-        $data[] = $row['productname'];
+        $data[] = $row;
     }
 }
 
@@ -36,7 +36,74 @@ $conn->close();
 
 
 
+<?php
+// Coordinator List
+$servername = "localhost";
+$username = "root";
+$password = "123456";
+$dbname = "db_ronex";
 
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Query to fetch data from promo table
+$sql = "SELECT fullname,branch FROM employee Where position = 'Agent' ";
+$result = $conn->query($sql);
+
+$coordinator = array();
+
+if ($result->num_rows > 0) {
+    // Fetch all rows into $data array
+    while ($row = $result->fetch_assoc()) {
+        $coordinator[] = $row;
+    }
+}
+
+// Close connection
+$conn->close();
+?>
+
+
+
+
+
+
+<?php
+// Coordinator List
+$servername = "localhost";
+$username = "root";
+$password = "123456";
+$dbname = "db_ronex";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Query to fetch data from employee table
+$sql = "SELECT fullname, branch FROM employee WHERE position = 'Agent'";
+$result = $conn->query($sql);
+
+$coordinators = array();
+
+if ($result->num_rows > 0) {
+    // Fetch all rows into $coordinators array
+    while ($row = $result->fetch_assoc()) {
+        $coordinators[] = array('fullname' => $row['fullname'], 'branch' => $row['branch']);
+    }
+}
+
+// Close connection
+$conn->close();
+?>
 
 
 
@@ -54,7 +121,7 @@ $conn->close();
 
 
 <script src="script.js"></script>
-<script src="pyscript/fetch.js"></script>
+
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -73,6 +140,9 @@ $conn->close();
 </style>
 
 <body>
+
+
+
 
 
 
@@ -137,6 +207,7 @@ $conn->close();
          
         </ul>
       </li>
+
       <li>
         <a href="#">
           <i class='bx bx-pie-chart-alt-2' ></i>
@@ -188,6 +259,7 @@ $conn->close();
   </li>
 </ul>
   </div>
+
   <section class="home-section">
     <div class="home-content">
       <i class='bx bx-menu' ></i>
@@ -220,23 +292,31 @@ $conn->close();
 
 <div>
 
-
 <div class="centered">
-    <label for="id">Member ID:</label>
-    <input class="searchmember" type="text" id="id">
-    <br> <!-- Add a line break -->
-    <br>
-   <center> <button type="submit">Find</button> </center>
+    <form action="trans/member_result.php" method="POST">
+        <label for="id">Member ID:</label>
+        <input class="searchmember" type="text" id="id" name="id">
+
+
+
+        <br> <!-- Add a line break -->
+        <br>
+        <center><button type="submit">Find</button></center>
+    </form>
 </div>
 
 
 
+
+
+
+
 <br>
 <br>
 
 <div class="centered">
 
-<form method="post" action="../Admin/trans/memberverified.php">
+<form method="post" action="trans/memberverified.php">
 
 <label for="lastname">Lastname:</label>
 <input name="lname" class="searchmember" type="text" id="lastname">
@@ -265,259 +345,266 @@ $conn->close();
 
 <br> 
 <br>
-
 <center> <button type="submit">Find</button> </center>
-
 
 </form>
 
 </div>
 
-
-
-
-<script>
-    // Function to populate months dynamically
-    function populateMonths() {
-    var select = document.getElementById("month");
-    var months = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"];
-    var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    for (var i = 0; i < months.length; i++) {
-        var option = document.createElement("option");
-        option.text = monthNames[i];
-        option.value = months[i];
-        select.add(option);
-    }
-}
-
-
-    // Function to populate days dynamically based on selected month and year
-    function populateDays() {
-        var month = document.getElementById("month").value;
-        var year = document.getElementById("year").value;
-        var select = document.getElementById("day");
-        select.innerHTML = '';
-
-        // Number of days in the selected month
-        var daysInMonth = new Date(year, month, 0).getDate();
-
-        var select = document.getElementById("day");
-    select.innerHTML = ""; // Clear existing options
-    
-    // Add leading zeros to single-digit numbers
-    function padNumber(number) {
-        return (number < 10 ? "0" : "") + number;
-    }
-
-    // Populate days
-    for (var i = 1; i <= daysInMonth; i++) {
-        var option = document.createElement("option");
-        option.text = padNumber(i); // Pad with leading zeros
-        option.value = padNumber(i); // Pad with leading zeros
-        select.add(option);
-    }
-
-    }
-
-    // Function to populate years dynamically
-    function populateYears() {
-        var select = document.getElementById("year");
-        var currentYear = new Date().getFullYear();
-        for (var i = currentYear; i >= 1900; i--) {
-            var option = document.createElement("option");
-            option.text = i;
-            option.value = i;
-            select.add(option);
-        }
-    }
-
-    // Initial population of months, days, and years
-    populateMonths();
-    populateDays();
-    populateYears();
-
-    // Event listeners for month and year changes
-    document.getElementById("month").addEventListener("change", populateDays);
-    document.getElementById("year").addEventListener("change", populateDays);
-</script>
+</section>
 
 
 
 
 
 
-
-  </section>
-
-  <div id="overlay" class="overlay">
+<div id="overlay" class="overlay">
   <div class="modal">
     <div class="modal-content">
-      <form method="post"  enctype='multipart/form-data'>
+      <form action="process/insertmember.php" method="POST">
         <div class="modal-layer">
-    
+          <div class="form-group">
+            <label for="productSelect">Select Product:</label>
+            <select id="productSelect" name="product" class="form-control" onchange="updatePin()" >
+              <option value="" disabled selected>Select a product</option>
+              <?php
+              foreach ($data as $row) {
+                  echo '<option value="' . htmlspecialchars($row['productname'], ENT_QUOTES, 'UTF-8') . '" data-pin="' . htmlspecialchars($row['pin'], ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($row['productname'], ENT_QUOTES, 'UTF-8') . '</option>';
+              }
+              ?>
+            </select>
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" id="pin" >
+          </div>
+
+
+          <div class="form-group">
+    <input type="text" class="form-control" name="" id="spotcash">
+</div>
+
+
+<div class="form-group">
+    <input type="text" class="form-control" name="price" id="price">
+</div>
+
+
+
+<div class="form-group">
+    <input type="text" class="form-control" name="mopdays" id="mopdays">
+</div>
+
+
+<div class="form-group">
+    <input type="text" class="form-control" id="changestatus">
+</div>
+
+<div class="form-group">
+    <label for="results">Select MOP:</label>
+    <select class="form-control" id="results">
+        <!-- Other options will be populated here -->
+    </select>
+</div>
+
+
+          <div class="form-group">
+            <label for="idmember">Member ID:</label>
+            <input type="text" class="form-control" id="idmember" name="idmember">
+          </div>
+
+          <div class="modal-layer">
+            <div class="form-group">
+              <label for="firstname">Firstname: *</label>
+              <input type="text" class="form-control" id="firstname" name="fname" >
+            </div>
+            <div class="form-group">
+              <label for="middlename">Middlename: *</label>
+              <input type="text" class="form-control" id="middlename" name="mname" >
+            </div>
+            <div class="form-group">
+              <label for="lastname">Lastname: *</label>
+              <input type="text" class="form-control" id="lastname" name="lname" >
+            </div>
+            <div class="form-group">
+              <label for="subBrgy">Sub/Brgy: *</label>
+              <input type="text" class="form-control" id="subBrgy" name="brgy" >
+            </div>
+            <div class="form-group">
+              <label for="cityMun">City/Mun: *</label>
+              <input type="text" class="form-control" id="cityMun" name="city" >
+            </div>
+            <div class="form-group">
+              <label for="cityProv">City/Prov: *</label>
+              <input type="text" class="form-control" id="cityProv" name="prov" >
+            </div>
+            <div class="form-group">
+              <label for="birthdate">Birthdate: *</label>
+              <input type="date" class="form-control" id="birthdate" name="bday" >
+            </div>
+            <div class="form-group">
+              <label for="religion">Religion: *</label>
+              <input type="text" class="form-control" id="religion" name="religion" >
+            </div>
+            <div class="form-group">
+              <label for="occupation">Occupation: *</label>
+              <input type="text" class="form-control" id="occupation" name="occupation" >
+            </div>
+            <div class="form-group">
+              <label for="contactNo">Contact No: *</label>
+              <input type="text" class="form-control" id="contactNo" name="contact" >
+            </div>
+            <div class="form-group">
+              <label for="civilStatus">Civil Status: *</label>
+              <input type="text" class="form-control" id="civilStatus" name="status" >
+            </div>
+            <div class="form-group">
+              <label for="gender">Gender: *</label>
+              <input type="text" class="form-control" id="gender" name="gender" >
+            </div>
+          </div>
+
+          <div id="claimantsSection" class="modal-layer">
+            <center>
+              <h2>Claimants</h2>
+            </center>
+
+            <div class="form-group">
+              <label for="claimantFirstname">Firstname: *</label>
+              <input type="text" class="form-control" id="claimantFirstname" name="cfname" >
+            </div>
+
+            <div class="form-group">
+              <label for="claimantLastname">Lastname: *</label>
+              <input type="text" class="form-control" id="claimantLastname" name="cmname" >
+            </div>
+            <div class="form-group">
+              <label for="claimantLastname">Lastname: *</label>
+              <input type="text" class="form-control" id="claimantLastname" name="clname" >
+            </div>
+            <div class="form-group">
+              <label for="claimantAge">Age: *</label>
+              <input type="text" class="form-control" id="claimantAge" name="cage" >
+            </div>
+            <div class="form-group">
+              <label for="claimantRelation">Relationship: *</label>
+              <input type="text" class="form-control" id="claimantRelation" name="crelation" >
+            </div>
+            <div class="form-group">
+              <label for="payerContact">Contact No: *</label>
+              <input type="text" class="form-control" id="payerContact" name="pcontact" >
+            </div>
+          </div>
+
+
+          <div id="beneficiarySection">
+            <center>
+              <h2>1st Beneficiary</h2>
+            </center>
+            <div class="form-group">
+              <label for="bfname">Firstname:</label>
+              <input type="text" class="form-control" id="bfname" name="bfname">
+            </div>
+            <div class="form-group">
+              <label for="bmname">Middlename:</label>
+              <input type="text" class="form-control" id="bmname" name="bmname">
+            </div>
+            <div class="form-group">
+              <label for="blname">Lastname:</label>
+              <input type="text" class="form-control" id="blname" name="blname">
+            </div>
+            <div class="form-group">
+              <label for="bage">Age:</label>
+              <input type="text" class="form-control" id="bage" name="bage">
+            </div>
+            <div class="form-group">
+              <label for="brelation">Relationship:</label>
+              <input type="text" class="form-control" id="brelation" name="brelation">
+            </div>
+
+
+            <center>
+              <h2>2nd Beneficiary</h2>
+            </center>
+            <div class="form-group">
+              <label for="b2fname">Firstname:</label>
+              <input type="text" class="form-control" id="b2fname" name="b2fname">
+            </div>
+            <div class="form-group">
+              <label for="b2mname">Middlename:</label>
+              <input type="text" class="form-control" id="b2mname" name="b2mname">
+            </div>
+            <div class="form-group">
+              <label for="b2lname">Lastname:</label>
+              <input type="text" class="form-control" id="b2lname" name="b2lname">
+            </div>
+            <div class="form-group">
+              <label for="b2age">Age:</label>
+              <input type="text" class="form-control" id="b2age" name="b2age">
+            </div>
+            <div class="form-group">
+              <label for="b2relation">Relationship:</label>
+              <input type="text" class="form-control" id="b2relation" name="b2relation">
+            </div>
+          </div>
+
+
+          <br><br>
+
+
+          <div class="form-group">
+            <label for="coordinator">Coordinator / Agent: *</label>
+            <select class="form-control" id="coordinator" name="coordinator"  onchange="updateBranch()">
+              <option value="" disabled selected>Select a coordinator</option>
+              <?php foreach ($coordinators as $coordinator): ?>
+              <option value="<?php echo htmlspecialchars($coordinator['fullname']); ?>" data-branch="<?php echo htmlspecialchars($coordinator['branch']); ?>">
+                <?php echo htmlspecialchars($coordinator['fullname']); ?>
+              </option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="branchx">Branch: *</label>
+            <input type="text" class="form-control" id="branchx" name="branch"  readonly>
+          </div>
+        </div>
 
         <div class="form-group">
-        <label for="productSelect">Select Product:</label>
-        <select id="productSelect" name="productSelect" class="form-control" required>
-            <?php
-            foreach ($data as $productname) {
-                echo '<option value="' . htmlspecialchars($productname) . '">' . htmlspecialchars($productname) . '</option>';
-            }
-            ?>
-        </select>
-    </div>
-       
-
-          <div class="form-group">
-            <label for="effectDate">Effect Date: *</label>
-            <input type="date" class="form-control" id="effectDate" name="effectDate" required>
-          </div>
-          <div class="form-group">
-            <label for="coordinator">Coordinator:</label>
-            <input type="text" class="form-control" id="coordinator" name="coordinator">
-          </div>
+          <label for="edate">Date Registered: *</label>
+          <input type="date" class="form-control" id="edate" name="edate" >
         </div>
 
-        <div class="modal-layer">
-    
-          <div class="form-group">
-            <label for="firstname">Firstname: *</label>
-            <input type="text" class="form-control" id="firstname" name="firstname" required>
-          </div>
-          <div class="form-group">
-            <label for="middlename">Middlename: *</label>
-            <input type="text" class="form-control" id="middlename" name="middlename" required>
-          </div>
-          <div class="form-group">
-            <label for="lastname">Lastname: *</label>
-            <input type="text" class="form-control" id="lastname" name="lastname" required>
-          </div>
-          <div class="form-group">
-            <label for="subBrgy">Sub/Brgy: *</label>
-            <input type="text" class="form-control" id="subBrgy" name="subBrgy" required>
-          </div>
-          <div class="form-group">
-            <label for="cityMun">City/Mun: *</label>
-            <input type="text" class="form-control" id="cityMun" name="cityMun" required>
-          </div>
-          <div class="form-group">
-            <label for="cityProv">City/Prov: *</label>
-            <input type="text" class="form-control" id="cityProv" name="cityProv" required>
-          </div>
-          <div class="form-group">
-            <label for="birthdate">Birthdate: *</label>
-            <input type="date" class="form-control" id="birthdate" name="birthdate" required>
-          </div>
-          <div class="form-group">
-            <label for="religion">Religion: *</label>
-            <input type="text" class="form-control" id="religion" name="religion" required>
-          </div>
-          <div class="form-group">
-            <label for="occupation">Occupation: *</label>
-            <input type="text" class="form-control" id="occupation" name="occupation" required>
-          </div>
-          <div class="form-group">
-            <label for="contactNo">Contact No: *</label>
-            <input type="text" class="form-control" id="contactNo" name="contactNo" required>
-          </div>
-          <div class="form-group">
-            <label for="civilStatus">Civil Status: *</label>
-            <input type="text" class="form-control" id="civilStatus" name="civilStatus" required>
-          </div>
-          <div class="form-group">
-            <label for="gender">Gender: *</label>
-            <input type="text" class="form-control" id="gender" name="gender" required>
-          </div>
-        </div>
-
-        <div class="modal-layer">
-          <Center><h2> Claimants </h2></Center>
-          
-          <div class="form-group">
-            <label for="payerName">Name of Payer: *</label>
-            <input type="text" class="form-control" id="payerName" name="payerName" required>
-          </div>
-          <div class="form-group">
-            <label for="payerContact">Contact No: *</label>
-            <input type="text" class="form-control" id="payerContact" name="payerContact" required>
-          </div>
-          <div class="form-group">
-            <label for="claimantFirstname">Firstname: *</label>
-            <input type="text" class="form-control" id="claimantFirstname" name="claimantFirstname" required>
-          </div>
-          <div class="form-group">
-            <label for="claimantLastname">Lastname: *</label>
-            <input type="text" class="form-control" id="claimantLastname" name="claimantLastname" required>
-          </div>
-          <div class="form-group">
-            <label for="claimantAge">Age: *</label>
-            <input type="text" class="form-control" id="claimantAge" name="claimantAge" required>
-          </div>
-          <div class="form-group">
-            <label for="claimantRelation">Relationship: *</label>
-            <input type="text" class="form-control" id="claimantRelation" name="claimantRelation" required>
-          </div>
 
 
-          <Center><h2> 1st Benificial </h2></Center>
 
-          <div class="form-group">
-            <label for="firstname">Firstname: *</label>
-            <input type="text" class="form-control" id="firstname" name="firstname" required>
-          </div>
-          <!-- Additional fields -->
-          <div class="form-group">
-            <label for="firstname2">Firstname:</label>
-            <input type="text" class="form-control" id="firstname2" name="firstname2">
-          </div>
-          <div class="form-group">
-            <label for="lastname2">Lastname:</label>
-            <input type="text" class="form-control" id="lastname2" name="lastname2">
-          </div>
-          <div class="form-group">
-            <label for="age2">Age:</label>
-            <input type="text" class="form-control" id="age2" name="age2">
-          </div>
-          <div class="form-group">
-            <label for="relationship2">Relationship:</label>
-            <input type="text" class="form-control" id="relationship2" name="relationship2">
-          </div>
-          <Center><h2> 2nd Benificial </h2></Center>
-          <div class="form-group">
-            <label for="firstname3">Firstname:</label>
-            <input type="text" class="form-control" id="firstname3" name="firstname3">
-          </div>
-          <div class="form-group">
-            <label for="lastname3">Lastname:</label>
-            <input type="text" class="form-control" id="lastname3" name="lastname3">
-          </div>
-          <div class="form-group">
-            <label for="age3">Age:</label>
-            <input type="text" class="form-control" id="age3" name="age3">
-          </div>
-          <div class="form-group">
-            <label for="relationship3">Relationship:</label>
-            <input type="text" class="form-control" id="relationship3" name="relationship3">
-          </div>
 
-          <br>
-          <br>
 
-          <div class="form-group">
-            <label for="claimantCoordinator">Coordinator: *</label>
-            <input type="text" class="form-control" id="claimantCoordinator" name="claimantCoordinator" required>
-          </div>
 
-         
-          <div class="form-group">
-            <label for="branch">Branch: *</label>
-            <input type="text" class="form-control" id="branch" name="branch" required>
-          </div>
-        </div>
-        
+
+
+<input type="hidden" name="bmonth" value="">
+<input type="hidden" name="byear" value="">
+<input type="hidden" name="type" value="">
+<input type="hidden" name="payer" value="">
+<input type="hidden" name="yearmonthdate" value="">
+<input type="hidden" name="yearmonth" value="">
+
+
+<!-- Need to remove -->
+
+<input type="hidden" name="modetag" value="">
+
+
+
+
+
+        <div id="responseMessage"></div>
+
         <div class="btn-container">
-        <button type="submit" class="btn btn-success">Submit</button>
-        <button type="button"  id="closeButton" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+
+          <button type="submit" class="btn btn-success">Submit</button>
+
+          <button type="button" id="closeButton" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
         </div>
       </form>
     </div>
@@ -528,6 +615,9 @@ $conn->close();
 
 
 
+
+<script src="pyscript/fetch.js"></script>
+<script src="pyscript/form-event-member.js"></script>
 
 
 

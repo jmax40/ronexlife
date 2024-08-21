@@ -1,3 +1,4 @@
+
 <?php
 // your-script.php
 
@@ -15,28 +16,14 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+// Get the Member ID from the POST request
+$member_id = $_POST['id'];
 
-// Retrieve and sanitize POST data
-$lname = isset($_POST['lname']) ? trim($_POST['lname']) : '';
-$fname = isset($_POST['fname']) ? trim($_POST['fname']) : '';
-$byear = isset($_POST['byear']) ? trim($_POST['byear']) : '';
-$bmonth = isset($_POST['bmonth']) ? trim($_POST['bmonth']) : '';
-$bday = isset($_POST['bday']) ? trim($_POST['bday']) : '';
-
-// Ensure month and day are in two-digit format
-$bmonth = str_pad($bmonth, 2, '0', STR_PAD_LEFT);
-$bday = str_pad($bday, 2, '0', STR_PAD_LEFT);
-
-// Concatenate the birthday
-$birthday = $byear . "-" . $bmonth . "-" . $bday;
-
-// Escape the inputs to prevent SQL injection
-$lname = $conn->real_escape_string($lname);
-$fname = $conn->real_escape_string($fname);
-$birthday = $conn->real_escape_string($birthday);
+// Escape the member_id to prevent SQL injection
+$member_id = $conn->real_escape_string($member_id);
 
 // SQL query to find the member
-$sql = "SELECT * FROM member WHERE lname = '$lname' AND fname = '$fname' AND bday = '$birthday'";
+$sql = "SELECT * FROM member WHERE idmember = '$member_id'";
 $result = $conn->query($sql);
 
 // Check if the member exists
@@ -49,6 +36,7 @@ if ($result->num_rows > 0) {
         'mname' => $member['mname'],
         'lname' => $member['lname'],
         'suffix' => $member['suffix'],
+
     ];
 } else {
     $member_data = null;
@@ -221,12 +209,12 @@ $conn->close();
 
     
     </div>
-    
+
     <div class="titlehead">
        <h1>Member Result<h1> 
 </div>
     <div class="indented-line"></div>
-
+    
     <br>
     <div class="inline-buttons">
   
@@ -261,12 +249,14 @@ $conn->close();
                 <td><?php echo htmlspecialchars($member_data['mname']); ?></td>
                 <td><?php echo htmlspecialchars($member_data['lname']); ?></td>
                 <td><?php echo htmlspecialchars($member_data['suffix']); ?></td>
-                <tr>
+                
+            </tr>
+            <tr>
             <td colspan="5">
         <center><button class="btn btn-success" onclick="window.history.back();">GO BACK</button><center>
     </td>
         </tr>
-            </tr>
+            
         <?php else: ?>
             <tr>
                 <td colspan="5">No member found with the given ID.</td>
@@ -277,12 +267,19 @@ $conn->close();
     </td>
 </tr>
         <?php endif; ?>
+       
     </tbody>
-</table>
+  
+</table> 
 
-     
 
   </section>
+ 
+ 
+
+
+
+
 
   <div id="overlay" class="overlay">
   <div class="modalv2">

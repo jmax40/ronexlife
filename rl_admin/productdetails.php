@@ -18,7 +18,7 @@ if ($conn->connect_error) {
 $pin = isset($_GET['pin']) ? $_GET['pin'] : '';
 
 // Fetch data from the database based on the 'pin' parameter
-$sql = "SELECT startid, mop, price, days, status FROM mop WHERE pin = ?";
+$sql = "SELECT startid, mop, price, days,commission,moc, status FROM mop WHERE pin = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $pin); // Bind the 'pin' parameter to the SQL query
 $stmt->execute();
@@ -246,6 +246,16 @@ $conn->close();
     </div>
 
     <div class="form-group-mop">
+        <label for="days">Agent Commission Amount: *</label>
+        <input type="number" class="form-control" id="commission" name="commission" placeholder="Commession of Sales Agent" required>
+    </div>
+
+    <div class="form-group-mop">
+        <label for="days">No. Of Effective Installment Commission : *</label>
+        <input type="number" class="form-control" id="moc" name="moc" placeholder = " Limit No. of Installment Commission " required>
+    </div>
+
+    <div class="form-group-mop">
         <label for="status">Status:</label>
         <select class="form-control" id="status" name="status">
             <option value="promo">Beneficiary</option>
@@ -276,8 +286,10 @@ $conn->close();
             <tr>
                 <th>Start ID</th>
                 <th>MOP</th>
-                <th>Price</th>
+                <th>Price</th>  
                 <th>Days</th>
+                <th>Commission</th>
+                <th>Limit Month Commission</th>
                 <th>Status</th>
             </tr>
             <?php foreach ($data as $row): ?>
@@ -286,6 +298,8 @@ $conn->close();
                 <td><?php echo htmlspecialchars($row['mop']); ?></td>
                 <td><?php echo htmlspecialchars($row['price']); ?></td>
                 <td><?php echo htmlspecialchars($row['days']); ?></td>
+                <td><?php echo htmlspecialchars($row['commission']); ?></td>
+                <td><?php echo htmlspecialchars($row['moc']); ?></td>
                 <td><?php echo htmlspecialchars($row['status']); ?></td>
             </tr>
             <?php endforeach; ?>
@@ -294,6 +308,7 @@ $conn->close();
         <p>No details found for Pin: <?php echo htmlspecialchars($pin); ?></p>
     <?php endif; ?>
   </section>
+
 
 
 
