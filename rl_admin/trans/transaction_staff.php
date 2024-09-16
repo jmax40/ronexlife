@@ -4,7 +4,7 @@
 
 
 <?php
-include_once '../process/foreach_transaction.php';
+include_once '../process/foreach_transaction_staff.php';
 
 // Your code here...
 ?>
@@ -182,7 +182,7 @@ include_once '../process/foreach_transaction.php';
     <div class="date-time">
         <p>DATE: <span id="date"><?php echo htmlspecialchars($day); ?> - <?php echo htmlspecialchars($month); ?> - <?php echo htmlspecialchars($year); ?></span></p>
         <p>TIME: <span id="time"><?php echo htmlspecialchars($time); ?></span></p>
-        <p>DELAYED DAYS: <span id="time"><?php echo htmlspecialchars($distantdate); ?></span></p>
+ 
         
     </div>
 
@@ -227,7 +227,7 @@ include_once '../process/foreach_transaction.php';
 <div class="indented-line"></div>
 <br>
 <div class="button-container">
-        <button class="inline-button" id="addButton">Add Payment<img src="../../img/icons/add.ico" alt="Add Icon" width="30" height="30"></button>
+
         <button class="inline-button" id="excelButton">Report<img src="../../img/icons/excel.ico" alt="Excel Icon" width="30" height="30"></button>
     </div>
     <div class="indented-line"></div>
@@ -329,91 +329,7 @@ include_once '../process/foreach_transaction.php';
 
 
 
-  <div id="overlay" class="overlay">
-  <div class="modalv2">
-    <div class="modal-content">
-      <center><h1>Payment Information</h1></center>
-      
-      <form method="post" action="insert_payment.php" enctype="multipart/form-data">
-        <div class="modal-layer">
-          <input type="text" class="form-control" value="<?php echo htmlspecialchars($member_data['pin']); ?>" name="idmember" required>
 
-          <div class="form-group">
-            <label for="product">OR number: *</label>
-            <input type="text" class="form-control" id="pin" name="ornumber" required>
-          </div>
-
-
-
-<div class="form-group">
-            <label for="installment">Installment: *</label>
-            <input type="number" class="form-control" value="1" id="installment" name="installment" required>
-        </div>
-
-
-
-
-        <div class="form-group">
-            <input type="date" class="form-control" value="<?php echo htmlspecialchars($effectdate); ?>"  id="effectdate" name="effectdate" required>
-        </div>
-    
-
-
-    <div class="form-group">
-            <label for="nextduedate">Next DueDate: *</label>
-            <input type="text" class="form-control" value="<?php echo htmlspecialchars($effectdate); ?>"  id="nextduedate" name="duedate" required>
-        </div>
-
-    
- 
-        <div class="form-group">
-        <label for="price">Aging*</label>
-    
-            <input type="text" class="form-control" value="<?php echo htmlspecialchars($distantdate); ?>"  id="aging" name="aging" required>
-        </div>
-
-
-
-
-        
-        <div class="form-group">
-        <label for="price">Total payment: *</label>
-    
-            <input type="text" class="form-control" value="<?php echo $total_amount; ?>"  id="partial_payment" name="partial_payment" required>
-        </div>
-
-        
-
-
-        <div class="form-group">
-        <label for="price">All Installment: *</label>
-    
-            <input type="text" class="form-control" value="<?php echo $total_installment; ?>"  id="moc" name="moc" required>
-        </div>
-
-
-
-
-
-
-          <div class="form-group">
-            <label for="price">Price: *</label>
-            <input type="text" class="form-control" value="<?php echo htmlspecialchars($member_data['price']); ?>" id="price" name="payment" required readonly>
-          </div>
-        
-        
-
-       
-
-        <br><br>
-        <div class="btn-container">
-          <button type="submit" class="btn btn-success" id="checkout">Pay Now</button>
-          <button type="button" id="closeButton" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
 
 
 

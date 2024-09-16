@@ -375,7 +375,7 @@ $conn->close();
             </select>
           </div>
           <div class="form-group">
-            <input type="text" class="form-control" id="pin" >
+            <input type="text" class="form-control" id="pin" name = "pinmop">
           </div>
 
 
@@ -396,15 +396,29 @@ $conn->close();
 
 
 <div class="form-group">
-    <input type="text" class="form-control" id="changestatus">
+    <input type="text" class="form-control" id="changestatus" >
 </div>
+
+
+
+
+<div class="form-group">
+    <input type="text" class="form-control" id="mopid" name= "mopid">
+</div>
+
+
+
+
+
+
 
 <div class="form-group">
     <label for="results">Select MOP:</label>
-    <select class="form-control" id="results">
-        <!-- Other options will be populated here -->
+    <select class="form-control" id="results" >
+        <!-- Options will be populated here -->
     </select>
 </div>
+
 
 
           <div class="form-group">
@@ -592,7 +606,6 @@ $conn->close();
 
 <!-- Need to remove -->
 
-<input type="hidden" name="modetag" value="">
 
 
 

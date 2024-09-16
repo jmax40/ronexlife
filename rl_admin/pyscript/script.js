@@ -27,6 +27,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   });
 
+  
   // Toggle sidebar visibility
   let sidebar = document.querySelector(".sidebar");
   let sidebarBtn = document.querySelector(".bx-menu");

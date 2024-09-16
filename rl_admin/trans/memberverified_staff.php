@@ -36,7 +36,7 @@ $fname = $conn->real_escape_string($fname);
 $birthday = $conn->real_escape_string($birthday);
 
 // SQL query to find the member
-$sql = "SELECT * FROM employee WHERE lastname = '$lname' AND firstname = '$fname' AND birthday = '$birthday'";
+$sql = "SELECT * FROM employee WHERE lastname = '$lname' AND firstname = '$fname' AND birthdate = '$birthday'";
 $result = $conn->query($sql);
 
 // Check if the member exists
@@ -46,7 +46,7 @@ if ($result->num_rows > 0) {
     $member_data = [
         'pin' => $member['staffid'],
         'fname' => $member['firstname'],
-        'mname' => $member['midllename'],
+        'mname' => $member['middlename'],
         'lname' => $member['lastname'],
         'suffix' => $member['suffix'],
     ];
@@ -223,7 +223,7 @@ $conn->close();
     </div>
     
     <div class="titlehead">
-       <h1>Member Result<h1> 
+       <h1>Agent Information<h1> 
 </div>
     <div class="indented-line"></div>
 
@@ -241,7 +241,7 @@ $conn->close();
 <table id="ptable">
     <thead>
         <tr>
-            <th>Product Pin:</th>
+            <th>Staff ID:</th>
             <th>First Name:</th>
             <th>Middle Name:</th>
             <th>Last Name:</th>
@@ -253,9 +253,9 @@ $conn->close();
             <tr>
                 <!-- Make Product Pin clickable -->
                 <td>
-                    <a href="transaction.php?pin=<?php echo urlencode($member_data['pin']); ?>">
-                        <?php echo htmlspecialchars($member_data['pin']); ?>
-                    </a>
+                <a href="transaction_staff.php?pin=<?php echo urlencode($member_data['fname'] . ' ' . $member_data['mname'] . ' ' . $member_data['lname']); ?>">
+                  <?php echo htmlspecialchars($member_data['pin']); ?>
+</a>         
                 </td>
                 <td><?php echo htmlspecialchars($member_data['fname']); ?></td>
                 <td><?php echo htmlspecialchars($member_data['mname']); ?></td>

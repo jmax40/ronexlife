@@ -14,7 +14,7 @@ if (isset($_POST['pin'])) {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql = "SELECT mop, status,spotcash,days,price FROM mop WHERE pin = ?";
+    $sql = "SELECT mop, status,spotcash,days,price,id FROM mop WHERE pin = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $pin);
     $stmt->execute();

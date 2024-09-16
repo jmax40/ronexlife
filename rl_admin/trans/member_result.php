@@ -226,6 +226,7 @@ $conn->close();
 <br>
 <br>
 
+
 <table id="ptable">
     <thead>
         <tr>
@@ -237,36 +238,36 @@ $conn->close();
         </tr>
     </thead>
     <tbody>
-        <?php if ($member_data): ?>
-            <tr>
-                <!-- Make Product Pin clickable -->
-                <td>
-                    <a href="transaction.php?pin=<?php echo urlencode($member_data['pin']); ?>">
-                        <?php echo htmlspecialchars($member_data['pin']); ?>
-                    </a>
-                </td>
-                <td><?php echo htmlspecialchars($member_data['fname']); ?></td>
-                <td><?php echo htmlspecialchars($member_data['mname']); ?></td>
-                <td><?php echo htmlspecialchars($member_data['lname']); ?></td>
-                <td><?php echo htmlspecialchars($member_data['suffix']); ?></td>
-                
-            </tr>
-            <tr>
-            <td colspan="5">
-        <center><button class="btn btn-success" onclick="window.history.back();">GO BACK</button><center>
-    </td>
-        </tr>
-            
-        <?php else: ?>
-            <tr>
-                <td colspan="5">No member found with the given ID.</td>
-            </tr>
-            <tr>
-    <td colspan="5">
-        <center><button class="btn btn-secondary" onclick="window.history.back();">GO BACK</button><center>
-    </td>
-</tr>
-        <?php endif; ?>
+          <?php if ($member_data): ?>
+              <tr>
+                  <!-- Make Product Pin clickable -->
+                  <td>
+                      <a href="transaction.php?pin=<?php echo urlencode($member_data['pin']); ?>">
+                          <?php echo htmlspecialchars($member_data['pin']); ?>
+                      </a>
+                  </td>
+                  <td><?php echo htmlspecialchars($member_data['fname']); ?></td>
+                  <td><?php echo htmlspecialchars($member_data['mname']); ?></td>
+                  <td><?php echo htmlspecialchars($member_data['lname']); ?></td>
+                  <td><?php echo htmlspecialchars($member_data['suffix']); ?></td>
+                  
+              </tr>
+              <tr>
+              <td colspan="5">
+          <center><button class="btn btn-success" onclick="window.history.back();">GO BACK</button><center>
+      </td>
+          </tr>
+              
+          <?php else: ?>
+              <tr>
+                  <td colspan="5">No member found with the given ID.</td>
+              </tr>
+              <tr>
+      <td colspan="5">
+          <center><button class="btn btn-secondary" onclick="window.history.back();">GO BACK</button><center>
+      </td>
+  </tr>
+          <?php endif; ?>
        
     </tbody>
   

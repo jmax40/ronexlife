@@ -130,7 +130,8 @@ function updatePin()
                             text: item.mop,
                             'data-spotcash': item.spotcash,
                             'data-days': item.days,
-                            'data-price':item.price
+                            'data-price':item.price,
+                            'data-id':item.id
                         }));
                     });
 
@@ -140,6 +141,7 @@ function updatePin()
                         $('#spotcash').val(response[0].spotcash);
                         $('#mopdays').val(response[0].days);
                         $('#price').val(response[0].price);
+                        $('#mopid').val(response[0].id);
                     }
                 },
                 error: function(xhr, status, error) {
@@ -156,11 +158,15 @@ function updatePin()
         var selectedSpotcash = $(this).find(':selected').data('spotcash');
         var selectedDays = $(this).find(':selected').data('days');
         var selectedPrice = $(this).find(':selected').data('price');
+        var selectedId = $(this).find(':selected').data('id');
 
         $('#changestatus').val(selectedStatus);
         $('#spotcash').val(selectedSpotcash);
         $('#mopdays').val(selectedDays);
         $('#price').val(selectedPrice);
+        $('#mopid').val(selectedId);
+        
+
     });
 });
 

@@ -88,17 +88,3 @@ $(document).ready(function(){
     // Set interval to fetch data and update table every 5 seconds
     setInterval(fetchProductDetails, 1000);
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-

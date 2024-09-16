@@ -13,8 +13,8 @@ try {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // Prepare the SQL query
-    $sql = "INSERT INTO `member` (`id`, `idmember`, `product`, `price`, `edate`, `mop`, `mopdays`, `fname`, `mname`, `lname`, `brgy`, `city`, `prov`, `bday`, `bmonth`, `byear`, `religion`, `occupation`, `contact`, `type`, `gender`, `payer`, `pcontact`, `bfname`, `bmname`, `blname`, `bage`, `brelation`, `b2fname`, `b2mname`, `b2lname`, `b2age`, `b2relation`, `cfname`, `cmname`, `clname`, `cage`, `crelation`, `coordinator`, `contractamount`, `status`, `modetag`, `branch`, `yearmonthdate`, `yearmonth`)
-            VALUES (:id, :idmember, :product, :price, :edate, :mop, :mopdays, :fname, :mname, :lname, :brgy, :city, :prov, :bday, :bmonth, :byear, :religion, :occupation, :contact, :type, :gender, :payer, :pcontact, :bfname, :bmname, :blname, :bage, :brelation, :b2fname, :b2mname, :b2lname, :b2age, :b2relation, :cfname, :cmname, :clname, :cage, :crelation, :coordinator, :contractamount, :status, :modetag, :branch, :yearmonthdate, :yearmonth)";
+    $sql = "INSERT INTO `member` (`id`, `idmember`, `product`, `price`, `edate`, `mopid`, `mopdays`, `fname`, `mname`, `lname`, `brgy`, `city`, `prov`, `bday`, `bmonth`, `byear`, `religion`, `occupation`, `contact`, `type`, `gender`, `payer`, `pcontact`, `bfname`, `bmname`, `blname`, `bage`, `brelation`, `b2fname`, `b2mname`, `b2lname`, `b2age`, `b2relation`, `cfname`, `cmname`, `clname`, `cage`, `crelation`, `coordinator`, `contractamount`, `status`, `pinmop`, `branch`, `yearmonthdate`, `yearmonth`)
+            VALUES (:id, :idmember, :product, :price, :edate, :mopid, :mopdays, :fname, :mname, :lname, :brgy, :city, :prov, :bday, :bmonth, :byear, :religion, :occupation, :contact, :type, :gender, :payer, :pcontact, :bfname, :bmname, :blname, :bage, :brelation, :b2fname, :b2mname, :b2lname, :b2age, :b2relation, :cfname, :cmname, :clname, :cage, :crelation, :coordinator, :contractamount, :status, :pinmop, :branch, :yearmonthdate, :yearmonth)";
 
     // Prepare the statement
     $stmt = $pdo->prepare($sql);
@@ -26,7 +26,7 @@ try {
         'product' => 'default_product',
         'price' => 0.00,
         'edate' => date('Y-m-d'),
-        'mop' => 'Not Specified',
+        'mopid' => 'Not Specified',
         'mopdays' => 'Not Specified',
         'fname' => 'Unknown',
         'mname' => '',
@@ -62,7 +62,7 @@ try {
         'coordinator' => 'Not Specified',
         'contractamount' => 0.00,
         'status' => 'Active',
-        'modetag' => 'default_modetag',
+        'pinmop' => 'default_modetag',
         'branch' => 'default_branch',
         'yearmonthdate' => date('Y-m-d'),
         'yearmonth' => date('Y-m')
@@ -74,11 +74,17 @@ try {
         $stmt->bindValue(':' . $key, $value);
     }
 
+    // Show the bound values before executing the query
+
     // Execute the query
     $stmt->execute();
 
     echo "Record inserted successfully.";
 } catch (PDOException $e) {
+    // Log the error details
     echo "Error: " . $e->getMessage();
+    echo "<pre>";
+    var_dump($e);
+    echo "</pre>";
 }
 ?>

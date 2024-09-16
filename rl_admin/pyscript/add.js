@@ -24,6 +24,8 @@ function saveproduct() {
 
     
 
+
+
 function savemop() {
     // Gather form data
     var formData = {

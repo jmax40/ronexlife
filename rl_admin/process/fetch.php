@@ -24,6 +24,8 @@ if ($type === 'promo') {
     $sql = "SELECT pin, productname, status FROM promo";
 } elseif ($type === 'mop') {
     $sql = "SELECT startid, mop, price, days, commission, moc, status FROM mop";
+} elseif ($type === 'transaction') {
+    $sql = "SELECT id, date FROM payment";  // Include startid
 }
 
 if ($sql !== '') {
@@ -44,13 +46,3 @@ $conn->close();
 header('Content-Type: application/json');
 echo json_encode($data);
 ?>
-
-
-
-
-
-
-
-
-
-

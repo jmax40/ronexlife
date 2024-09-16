@@ -1,3 +1,4 @@
+
 <?php
 // your-script.php
 
@@ -15,28 +16,14 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+// Get the Member ID from the POST request
+$member_id = $_POST['id'];
 
-// Retrieve and sanitize POST data
-$lname = isset($_POST['lname']) ? trim($_POST['lname']) : '';
-$fname = isset($_POST['fname']) ? trim($_POST['fname']) : '';
-$byear = isset($_POST['byear']) ? trim($_POST['byear']) : '';
-$bmonth = isset($_POST['bmonth']) ? trim($_POST['bmonth']) : '';
-$bday = isset($_POST['bday']) ? trim($_POST['bday']) : '';
-
-// Ensure month and day are in two-digit format
-$bmonth = str_pad($bmonth, 2, '0', STR_PAD_LEFT);
-$bday = str_pad($bday, 2, '0', STR_PAD_LEFT);
-
-// Concatenate the birthday
-$birthday = $byear . "-" . $bmonth . "-" . $bday;
-
-// Escape the inputs to prevent SQL injection
-$lname = $conn->real_escape_string($lname);
-$fname = $conn->real_escape_string($fname);
-$birthday = $conn->real_escape_string($birthday);
+// Escape the member_id to prevent SQL injection
+$member_id = $conn->real_escape_string($member_id);
 
 // SQL query to find the member
-$sql = "SELECT * FROM employee WHERE lastname = '$lname' AND firstname = '$fname' AND birthday = '$birthday'";
+$sql = "SELECT * FROM employee WHERE staffid = '$member_id'";
 $result = $conn->query($sql);
 
 // Check if the member exists
@@ -46,9 +33,10 @@ if ($result->num_rows > 0) {
     $member_data = [
         'pin' => $member['staffid'],
         'fname' => $member['firstname'],
-        'mname' => $member['midllename'],
+        'mname' => $member['middlename'],
         'lname' => $member['lastname'],
         'suffix' => $member['suffix'],
+
     ];
 } else {
     $member_data = null;
@@ -221,12 +209,12 @@ $conn->close();
 
     
     </div>
-    
+
     <div class="titlehead">
-       <h1>Member Result<h1> 
+       <h1>Agent Information<h1> 
 </div>
     <div class="indented-line"></div>
-
+    
     <br>
     <div class="inline-buttons">
   
@@ -237,6 +225,7 @@ $conn->close();
 
 <br>
 <br>
+
 
 <table id="ptable">
     <thead>
@@ -249,40 +238,51 @@ $conn->close();
         </tr>
     </thead>
     <tbody>
-        <?php if ($member_data): ?>
-            <tr>
-                <!-- Make Product Pin clickable -->
-                <td>
-                    <a href="transaction.php?pin=<?php echo urlencode($member_data['pin']); ?>">
-                        <?php echo htmlspecialchars($member_data['pin']); ?>
-                    </a>
-                </td>
-                <td><?php echo htmlspecialchars($member_data['fname']); ?></td>
-                <td><?php echo htmlspecialchars($member_data['mname']); ?></td>
-                <td><?php echo htmlspecialchars($member_data['lname']); ?></td>
-                <td><?php echo htmlspecialchars($member_data['suffix']); ?></td>
-                <tr>
-            <td colspan="5">
-        <center><button class="btn btn-success" onclick="window.history.back();">GO BACK</button><center>
-    </td>
-        </tr>
-            </tr>
-        <?php else: ?>
-            <tr>
-                <td colspan="5">No member found with the given ID.</td>
-            </tr>
-            <tr>
-    <td colspan="5">
-        <center><button class="btn btn-secondary" onclick="window.history.back();">GO BACK</button><center>
-    </td>
-</tr>
-        <?php endif; ?>
-    </tbody>
-</table>
+          <?php if ($member_data): ?>
+              <tr>
+                  <!-- Make Product Pin clickable -->
+                  <td>
+                  <a href="transaction_staff.php?pin=<?php echo urlencode($member_data['fname'] . ' ' . $member_data['mname'] . ' ' . $member_data['lname']); ?>">
+                  <?php echo htmlspecialchars($member_data['pin']); ?>
+</a>
 
-     
+             
+                  </td>
+                  <td><?php echo htmlspecialchars($member_data['fname']); ?></td>
+                  <td><?php echo htmlspecialchars($member_data['mname']); ?></td>
+                  <td><?php echo htmlspecialchars($member_data['lname']); ?></td>
+                  <td><?php echo htmlspecialchars($member_data['suffix']); ?></td>
+                  
+              </tr>
+              <tr>
+              <td colspan="5">
+          <center><button class="btn btn-success" onclick="window.history.back();">GO BACK</button><center>
+      </td>
+          </tr>
+              
+          <?php else: ?>
+              <tr>
+                  <td colspan="5">No member found with the given ID.</td>
+              </tr>
+              <tr>
+      <td colspan="5">
+          <center><button class="btn btn-secondary" onclick="window.history.back();">GO BACK</button><center>
+      </td>
+  </tr>
+          <?php endif; ?>
+       
+    </tbody>
+  
+</table> 
+
 
   </section>
+ 
+ 
+
+
+
+
 
   <div id="overlay" class="overlay">
   <div class="modalv2">

@@ -166,41 +166,72 @@
 
 <br>
 <br>
-    <table>
-    <thead>
-        <tr>
-            <th>CN</th>
-            <th>Name</th>
-            <th>Address</th>
-            <th>MOP</th>
-            <th>Effective Date</th>
-            <th>Status</th>
-            <th>Agent</th>
-            <th>Edit</th>
-            <th>Delete</th>
-        </tr>
-    </thead>
-    <tbody>
-        <!-- Replace the content below with your actual data -->
-        <tr>
-            <td>123</td>
-            <td>John Doe</td>
-            <td>123 Main St</td>
-            <td>Credit Card</td>
-            <td>2024-01-27</td>
-            <td>Active</td>
-            <td>Agent Smith</td>
-            <td><button id="tableicon"><img src="../img/icons/edit.ico" alt="Edit Icon" width="25" height="25" ></button></td>
-            <td><button id="tableicon"><img src="../img/icons/delete.ico" alt="Delete Icon" width="25" height="25" ></button></td>
-        </tr>
-        <!-- Add more rows as needed -->
-    </tbody>
-</table>
+
+
+<div class="centered">
+    <form action="trans/member_result_staff.php" method="POST">
+        <label for="id">Staff ID:</label>
+        <input class="searchmember" type="text" id="id" name="id">
+
+
+
+        <br> <!-- Add a line break -->
+        <br>
+        <center><button type="submit">Find</button></center>
+    </form>
+</div>
+
+
+
+
+
+
+
+<br>
+<br>
+
+<div class="centered">
+
+<form method="post" action="trans/memberverified_staff.php">
+
+<label for="lastname">Lastname:</label>
+<input name="lname" class="searchmember" type="text" id="lastname">
+
+<label for="firstname">Firstname:</label>
+<input name="fname" class="searchmember" type="text" id="firstname">
+
+
+<br><br>
+<center><label for="year">Birthday:</label></center>
+<br>
+<label for="year">Year:</label>
+<select name="byear" class="searchmember" id="year">
+    <!-- Options will be added dynamically with JavaScript -->
+</select>
+
+<label for="month">Month:</label>
+<select name="bmonth" class="searchmember" id="month">
+    <!-- Options will be added dynamically with JavaScript -->
+</select>
+
+<label for="day">Day:</label>
+<select name="bday" class="searchmember" id="day">
+    <!-- Options will be added dynamically with JavaScript -->
+</select>
+
+<br> 
+<br>
+<center> <button type="submit">Find</button> </center>
+
+</form>
+
+</div>
+
   </section>
   <div id="overlay" class="overlay">
   <div class="modal">
     <div class="modal-content">
-      <form method="post" action="Maharlika.php" enctype='multipart/form-data'>
+    <form method="post" action="trans/insert_staff.php" enctype='multipart/form-data'>
         <div class="modal-layer">
 
 
@@ -217,7 +248,10 @@
           </div>
 
 
-
+          <div class="form-group">
+            <label for="firstname">Staff ID: *</label>
+            <input type="text" class="form-control" id="staffid" name="staffid" required>
+          </div>
 
           <div class="form-group">
             <label for="firstname">Firstname: *</label>
@@ -225,11 +259,11 @@
           </div>
           <div class="form-group">
             <label for="firstname">Middlename: *</label>
-            <input type="text" class="form-control" id="firstname" name="firstname" required>
+            <input type="text" class="form-control" id="firstname" name="middlename" required>
           </div>
           <div class="form-group">
             <label for="firstname">Lastname: *</label>
-            <input type="text" class="form-control" id="firstname" name="firstname" required>
+            <input type="text" class="form-control" id="firstname" name="lastname" required>
           </div>
           <div class="form-group">
             <label for="birthdate">Birthdate: *</label>
@@ -253,11 +287,11 @@
           </div>
           <div class="form-group">
             <label for="age">Mobile No: *</label>
-            <input type="text" class="form-control" id="age" name="age" required>
+            <input type="text" class="form-control" id="age" name="mobile_no" required>
           </div>
           <div class="form-group">
             <label for="address">Email: *</label>
-            <input type="email" class="form-control" id="address" name="address" required>
+            <input type="email" class="form-control" id="address" name="email" required>
           </div>
           <div class="form-group">
             <label for="username">Username: *</label>
@@ -297,6 +331,13 @@
   
 
 
+<script src="pyscript/fetch.js"></script>
+<script src="pyscript/form-event-member.js"></script>
+
+
+
+
+  
 
 
 
