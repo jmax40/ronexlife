@@ -1,67 +1,50 @@
 <?php
-// Establish database connection
-$servername = "localhost";
-$username = "root";
-$password = "123456";
-$dbname = "db_ronex";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
 // Check if the request method is POST
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Establish database connection
+    $servername = "localhost";
+    $username = "root";
+    $password = "123456";
+    $dbname = "db_ronex";
+
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
     // Retrieve and sanitize form data
     $pin = $conn->real_escape_string($_POST['pin']);
     $startid = $conn->real_escape_string($_POST['startid']);
     $mop = $conn->real_escape_string($_POST['mop']);
+    $spotcash = floatval($_POST['spotcash']); // Adjusted to float since it represents an amount
     $price = floatval($_POST['price']);
     $days = intval($_POST['days']);
-    $commission = $conn->real_escape_string($_POST['commission']);
-    $moc = $conn->real_escape_string($_POST['moc']);
+    $commission = floatval($_POST['commission']);
+    $moc = intval($_POST['moc']);
     $status = $conn->real_escape_string($_POST['status']);
-    
-    // Prepare and bind parameters (to prevent SQL injection)
-    $stmt = $conn->prepare("INSERT INTO mop (pin, startid, mop, price, days, commission, moc, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssssssss", $pin, $startid, $mop, $price, $days, $commission, $moc, $status);
 
+    // Prepare and execute the query (Added correct placeholders and bindings)
+    $stmt = $conn->prepare("INSERT INTO mop (pin, startid, mop, spotcash, price, days, commission, moc, status) 
+                            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssdiidis", $pin, $startid, $mop, $spotcash, $price, $days, $commission, $moc, $status);
+
+    // Execute and check for success
     if ($stmt->execute()) {
-        // If insertion is successful
-        $response = [
-            'status' => 'success',
-            'pin' => $pin,
-            'startid' => $startid,
-            'mop' => $mop,
-            'price' => $price,
-            'days' => $days,
-            'commission' => $commission,
-            'moc' => $moc,
-            'status' => $status
-        ];
+        // Redirect to product details page with the pin value in the query string
+        header("Location: ../productdetails.php?pin=" . urlencode($pin));
+        exit();
     } else {
-        // If there's an error with the insertion
-        $response = [
-            'status' => 'error',
-            'message' => $stmt->error
-        ];
+        // Output error message if query fails
+        echo "Error: " . $stmt->error;
     }
 
-    // Close statement
+    // Close statement and connection
     $stmt->close();
-
-    // Output response in JSON format
-    header('Content-Type: application/json');
-    echo json_encode($response);
+    $conn->close();
 } else {
-    // Handle invalid request
-    http_response_code(400);
-    echo 'Invalid request';
+    echo "Invalid request.";
 }
-
-// Close database connection
-$conn->close();
 ?>

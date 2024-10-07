@@ -34,29 +34,25 @@
 
 
 
-
-
-
-
-  <div class="sidebar close">
+<div class="sidebar close">
     <div class="logo-details">
-      <i class='bx bxl-c-plus-plus'></i>
-      <span class="logo_name">Ronex Life</span>
+ <i> <img src="../img/icons/leaf.ico" alt="Map Icon" style="width: 40px; height: 40px;">  </i>
+      <span class="logo_name" >Ronex Life</span>
     </div>
     <ul class="nav-links">
       <li>
         <a href="dashboard.php">
           <i class='bx bx-grid-alt' ></i>
-          <span class="link_name" href="dashboard.php" >Dashboard</span>
+          <span class="link_name" href="index.php" >Dashboard</span>
         </a>
         <ul class="sub-menu blank">
-          <li><a class="link_name" href="dashboard.php">Dashboard</a></li>
+        <li><a class="link_name" href="index.php">Dashboard</a></li>
         </ul>
       </li>
       <li>
         <div class="iocn-link">
           <a href="#">
-            <i class='bx bx-collection' ></i>
+          <i class='bx bx-group'></i>
             <span class="link_name">Members</span>
           </a>
           <i class='bx bxs-chevron-down arrow' ></i>
@@ -71,7 +67,7 @@
       <li>
         <div class="iocn-link">
           <a href="#">
-            <i class='bx bx-collection' ></i>
+          <i class='bx bx-package'></i>
             <span class="link_name">Products</span>
           </a>
           <i class='bx bxs-chevron-down arrow' ></i>
@@ -86,7 +82,7 @@
       <li>
         <div class="iocn-link">
           <a href="#">
-            <i class='bx bx-book-alt' ></i>
+          <i class='bx bx-building'></i>
             <span class="link_name">Branch</span>
           </a>
           <i class='bx bxs-chevron-down arrow' ></i>
@@ -94,39 +90,15 @@
         <ul class="sub-menu">
           <li><a class="link_name" href="#">Branch</a></li>
           <li><a href="branchinfo.php">Info</a></li>
-          <li><a href="branchperformance.php">Performance</a></li>
           <li><a href="branchmember.php">Members</a></li>
+          <li><a href="branchperformance.php">Performance</a></li>
          
         </ul>
       </li>
-      <li>
-        <a href="#">
-          <i class='bx bx-pie-chart-alt-2' ></i>
-          <span class="link_name">Analytics</span>
-        </a>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="#">Analytics</a></li>
-        </ul>
-      </li>
+     
   
-      <li>
-        <a href="#">
-          <i class='bx bx-compass' ></i>
-          <span class="link_name">Explore</span>
-        </a>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="#">Explore</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="#">
-          <i class='bx bx-history'></i>
-          <span class="link_name">History</span>
-        </a>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="#">History</a></li>
-        </ul>
-      </li>
+     
+
       <li>
         <a href="#">
           <i class='bx bx-cog' ></i>
@@ -137,6 +109,8 @@
         </ul>
       </li>
       <li>
+
+
     <div class="profile-details">
       <div class="profile-content">
         <!--<img src="image/profile.jpg" alt="profileImg">-->
@@ -149,6 +123,8 @@
     </div>
   </li>
 </ul>
+  </div>
+
   </div>
   <section class="home-section">
     <div class="home-content">
@@ -175,56 +151,38 @@
 
 <div class="indented-line"></div>
 
+
+
+
+
 <br>
 <br>
-    <table>
-    <thead>
-        <tr>
-            <th>CN</th>
-            <th>Name</th>
-            <th>Address</th>
-            <th>MOP</th>
-            <th>Effective Date</th>
-            <th>Status</th>
-            <th>Agent</th>
-            <th>Edit</th>
-            <th>Delete</th>
-            <th>Bills</th>
 
-        </tr>
-    </thead>
-    <tbody id="data-table-body">
-      <?php while ($row=$resultM->fetch_assoc()): ?>
-      <tr class="mb-2">
-        <td class="text-center"><?php echo $row['idmember']; ?></td>
-        <td  class="text-center"><?php echo $row['fname']; ?> <?php echo $row['mname']; ?> <?php echo $row['lname']; ?></td>
-        <td class="text-center"><?php echo $row['brgy']; ?> <?php echo $row['city']; ?> <?php echo $row['prov']; ?></td>
-        <td  class="text-center"><?php echo $row['mop']; ?></td>
-        <td class="text-center"><?php echo date('F j, Y', strtotime($row['edate'])); ?></td>
-        <td class="text-center"><?php echo $row['type']; ?></td>
-        <td  class="text-center"><?php echo $row['coordinator']; ?></td>
-        <td class="text-center">
-    <a href="edit.php?GetID=<?php echo $row['id'] ?>">
-        <img src="../img/icons/edit.ico" alt="Edit Icon" width="25" height="25">
-    </a>
-</td>
 
-<td class="text-center">
-    <a href="DelM.php?Del=<?php echo $row['id']; ?>&coordinator=<?php echo urlencode($row['coordinator']); ?>" onclick="return confirm('Are you sure you want to permanently delete this account ?')">
-        <img src="../img/icons/delete.ico" alt="Delete Icon" width="25" height="25">
-    </a>
-</td>
+<div class="centered">
+    <form action="trans/member_result_transaction.php" method="POST">
+        <label for="id">Start Date:</label>
+        <input class="searchmember" type="date" id="startdate" name="startdate"> <br>
 
-<td class="text-center">
-    <a href="payment.php?GetID=<?php echo $row['id'] ?>">
-        <img src="../img/icons/ledger.ico" alt="Ledger Icon" width="25" height="25">
-    </a>
-</td>
 
-      </tr>
-      <?php endwhile; ?>
-    </tbody>
-</table>
+ <label for="id">End Date:</label>
+        <input class="searchmember" type="date" id="enddate" name="enddate"> <br>
+
+        <br> <!-- Add a line break -->
+        <br>
+        <center><button type="submit">Generate</button></center>
+        <br>
+        <center><button type="submit">Download XML</button></center>
+    </form>
+</div>
+
+
+
+
+
+
+
+
   </section>
 
   <div id="overlay" class="overlay">

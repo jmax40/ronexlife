@@ -25,25 +25,30 @@
 </style>
 
 <body>
-  <div class="sidebar close">
+
+
+
+  <div
+
+<div class="sidebar close">
     <div class="logo-details">
-      <i class='bx bxl-c-plus-plus'></i>
-      <span class="logo_name">CodingLab</span>
+ <i> <img src="../img/icons/leaf.ico" alt="Map Icon" style="width: 40px; height: 40px;">  </i>
+      <span class="logo_name" >Ronex Life</span>
     </div>
     <ul class="nav-links">
       <li>
         <a href="dashboard.php">
           <i class='bx bx-grid-alt' ></i>
-          <span class="link_name" href="dashboard.php">Dashboard</span>
+          <span class="link_name" href="index.php" >Dashboard</span>
         </a>
         <ul class="sub-menu blank">
-          <li><a class="link_name" href="#">Members</a></li>
+        <li><a class="link_name" href="index.php">Dashboard</a></li>
         </ul>
       </li>
       <li>
         <div class="iocn-link">
           <a href="#">
-            <i class='bx bx-collection' ></i>
+          <i class='bx bx-group'></i>
             <span class="link_name">Members</span>
           </a>
           <i class='bx bxs-chevron-down arrow' ></i>
@@ -58,7 +63,7 @@
       <li>
         <div class="iocn-link">
           <a href="#">
-            <i class='bx bx-collection' ></i>
+          <i class='bx bx-package'></i>
             <span class="link_name">Products</span>
           </a>
           <i class='bx bxs-chevron-down arrow' ></i>
@@ -73,7 +78,7 @@
       <li>
         <div class="iocn-link">
           <a href="#">
-            <i class='bx bx-book-alt' ></i>
+          <i class='bx bx-building'></i>
             <span class="link_name">Branch</span>
           </a>
           <i class='bx bxs-chevron-down arrow' ></i>
@@ -81,39 +86,15 @@
         <ul class="sub-menu">
           <li><a class="link_name" href="#">Branch</a></li>
           <li><a href="branchinfo.php">Info</a></li>
-          <li><a href="branchperformance.php">Performance</a></li>
           <li><a href="branchmember.php">Members</a></li>
+          <li><a href="branchperformance.php">Performance</a></li>
          
         </ul>
       </li>
-      <li>
-        <a href="#">
-          <i class='bx bx-pie-chart-alt-2' ></i>
-          <span class="link_name">Analytics</span>
-        </a>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="#">Analytics</a></li>
-        </ul>
-      </li>
+     
   
-      <li>
-        <a href="#">
-          <i class='bx bx-compass' ></i>
-          <span class="link_name">Explore</span>
-        </a>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="#">Explore</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="#">
-          <i class='bx bx-history'></i>
-          <span class="link_name">History</span>
-        </a>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="#">History</a></li>
-        </ul>
-      </li>
+     
+
       <li>
         <a href="#">
           <i class='bx bx-cog' ></i>
@@ -124,6 +105,8 @@
         </ul>
       </li>
       <li>
+
+
     <div class="profile-details">
       <div class="profile-content">
         <!--<img src="image/profile.jpg" alt="profileImg">-->
@@ -137,6 +120,9 @@
   </li>
 </ul>
   </div>
+
+
+
   <section class="home-section">
     <div class="home-content">
       <i class='bx bx-menu' ></i>
@@ -231,22 +217,18 @@
   <div id="overlay" class="overlay">
   <div class="modal">
     <div class="modal-content">
-    <form method="post" action="trans/insert_staff.php" enctype='multipart/form-data'>
+      <form method="post" action="trans/insert_staff.php" enctype='multipart/form-data' onsubmit="return validatePasswords()">
         <div class="modal-layer">
-
-
-
-        <div class="form-group">
+          <div class="form-group">
             <label for="gender">Position: *</label>
             <select class="form-control" id="position" name="position" required>
-            <option value="other">BS</option>
+              <option value="other">BS</option>
               <option value="male">Agent</option>
               <option value="female">Manager</option>
               <option value="other">Area Manager</option>
               <option value="other">Administrator</option>
             </select>
           </div>
-
 
           <div class="form-group">
             <label for="firstname">Staff ID: *</label>
@@ -258,12 +240,12 @@
             <input type="text" class="form-control" id="firstname" name="firstname" required>
           </div>
           <div class="form-group">
-            <label for="firstname">Middlename: *</label>
-            <input type="text" class="form-control" id="firstname" name="middlename" required>
+            <label for="middlename">Middlename: *</label>
+            <input type="text" class="form-control" id="middlename" name="middlename" required>
           </div>
           <div class="form-group">
-            <label for="firstname">Lastname: *</label>
-            <input type="text" class="form-control" id="firstname" name="lastname" required>
+            <label for="lastname">Lastname: *</label>
+            <input type="text" class="form-control" id="lastname" name="lastname" required>
           </div>
           <div class="form-group">
             <label for="birthdate">Birthdate: *</label>
@@ -286,12 +268,12 @@
             </select>
           </div>
           <div class="form-group">
-            <label for="age">Mobile No: *</label>
-            <input type="text" class="form-control" id="age" name="mobile_no" required>
+            <label for="mobile_no">Mobile No: *</label>
+            <input type="text" class="form-control" id="mobile_no" name="mobile_no" required>
           </div>
           <div class="form-group">
-            <label for="address">Email: *</label>
-            <input type="email" class="form-control" id="address" name="email" required>
+            <label for="email">Email: *</label>
+            <input type="email" class="form-control" id="email" name="email" required>
           </div>
           <div class="form-group">
             <label for="username">Username: *</label>
@@ -318,9 +300,6 @@
     </div>
   </div>
 </div>
-
-
-
 
 
 

@@ -18,7 +18,7 @@ if ($conn->connect_error) {
 $pin = isset($_GET['pin']) ? $_GET['pin'] : '';
 
 // Fetch data from the database based on the 'pin' parameter
-$sql = "SELECT startid, mop, price, days,commission,moc, status FROM mop WHERE pin = ?";
+$sql = "SELECT startid, mop, price, days,commission,moc,status FROM mop WHERE pin = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $pin); // Bind the 'pin' parameter to the SQL query
 $stmt->execute();
@@ -89,32 +89,32 @@ $conn->close();
 
 
 
-  <div class="sidebar close">
+<div class="sidebar close">
     <div class="logo-details">
-      <i class='bx bxl-c-plus-plus'></i>
+ <i> <img src="../img/icons/leaf.ico" alt="Map Icon" style="width: 40px; height: 40px;">  </i>
       <span class="logo_name" >Ronex Life</span>
     </div>
     <ul class="nav-links">
       <li>
         <a href="dashboard.php">
           <i class='bx bx-grid-alt' ></i>
-          <span class="link_name" href="dashboard.php" >Dashboard</span>
+          <span class="link_name" href="index.php" >Dashboard</span>
         </a>
         <ul class="sub-menu blank">
-        <li><a class="link_name" href="dashboard.php">Dashboard</a></li>
+        <li><a class="link_name" href="index.php">Dashboard</a></li>
         </ul>
       </li>
       <li>
         <div class="iocn-link">
           <a href="#">
-            <i class='bx bx-collection' ></i>
+          <i class='bx bx-group'></i>
             <span class="link_name">Members</span>
           </a>
           <i class='bx bxs-chevron-down arrow' ></i>
         </div>
         <ul class="sub-menu">
           <li><a class="link_name" href="#">Members</a></li>
-          <li><a href="index.php">Client </a></li>
+          <li><a href="member.php">Client </a></li>
           <li><a href="staff.php">Officers</a></li>
           <li><a href="transaction.php">Transaction</a></li>
         </ul>
@@ -122,7 +122,7 @@ $conn->close();
       <li>
         <div class="iocn-link">
           <a href="#">
-            <i class='bx bx-collection' ></i>
+          <i class='bx bx-package'></i>
             <span class="link_name">Products</span>
           </a>
           <i class='bx bxs-chevron-down arrow' ></i>
@@ -137,7 +137,7 @@ $conn->close();
       <li>
         <div class="iocn-link">
           <a href="#">
-            <i class='bx bx-book-alt' ></i>
+          <i class='bx bx-building'></i>
             <span class="link_name">Branch</span>
           </a>
           <i class='bx bxs-chevron-down arrow' ></i>
@@ -145,39 +145,15 @@ $conn->close();
         <ul class="sub-menu">
           <li><a class="link_name" href="#">Branch</a></li>
           <li><a href="branchinfo.php">Info</a></li>
-          <li><a href="branchperformance.php">Performance</a></li>
           <li><a href="branchmember.php">Members</a></li>
+          <li><a href="branchperformance.php">Performance</a></li>
          
         </ul>
       </li>
-      <li>
-        <a href="#">
-          <i class='bx bx-pie-chart-alt-2' ></i>
-          <span class="link_name">Analytics</span>
-        </a>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="#">Analytics</a></li>
-        </ul>
-      </li>
+     
   
-      <li>
-        <a href="#">
-          <i class='bx bx-compass' ></i>
-          <span class="link_name">Explore</span>
-        </a>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="#">Explore</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="#">
-          <i class='bx bx-history'></i>
-          <span class="link_name">History</span>
-        </a>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="#">History</a></li>
-        </ul>
-      </li>
+     
+
       <li>
         <a href="#">
           <i class='bx bx-cog' ></i>
@@ -188,6 +164,8 @@ $conn->close();
         </ul>
       </li>
       <li>
+
+
     <div class="profile-details">
       <div class="profile-content">
         <!--<img src="image/profile.jpg" alt="profileImg">-->
@@ -201,6 +179,15 @@ $conn->close();
   </li>
 </ul>
   </div>
+
+
+
+
+
+
+
+  
+  </div>
   <section class="home-section">
     <div class="home-content">
       <i class='bx bx-menu' ></i>
@@ -208,69 +195,105 @@ $conn->close();
 
     
     </div>
-    <div class="indented-line"></div>
+
     <br>
     <div class="titlehead">
-    
        <h1>Create Mode of Payment<h1> 
 </div>
     <div class="indented-line"></div>
     <br>
-
+    <div class="inline-buttons">
   
+    <div class="input-container">
+
+</div>
+
+    <button class="inline-button" id="addButton">Add MOP<img src="../img/icons/add.ico" alt="Edit Icon" width="30" height="30"></button>
+  <button class="inline-button" id="excelButton">Report<img src="../img/icons/excel.ico" alt="Edit Icon" width="30" height="30" ></i></button>
+</div>
 
 
- 
+<div class="indented-line"></div>
 
-    <form id="mopForm" method="POST"  enctype="multipart/form-data">
-    <input type="hidden" class="form-control" value="<?php echo htmlspecialchars($pin); ?>" id="pin" name="pin" required>
 
-    <div class="form-group-mop">
+
+
+
+
+
+<div id="overlay" class="overlay">
+  <div class="modalv2">
+    <div class="modal-content">
+      <center><h1>Product Information</h1></center>
+      
+      
+      <!-- Updated form to submit to insert_promo.php -->
+      <form method="post" enctype="multipart/form-data" action="process/add.php">
+        <div class="modal-layer">
+
+
+        
+    
+        <input type="hidden" value="<?php echo htmlspecialchars($pin); ?>" name="pin" class="form-control" id="pin">
+
+        
+        <div class="form-group">
         <label for="mop">Name of MOP: *</label>
         <input type="text" class="form-control" id="mop" name="mop" required>
     </div>
 
-    <div class="form-group-mop">
+    <div class="form-group">
         <label for="startid">Increment ID: *</label>
         <input type="text" class="form-control" id="startid" name="startid" required>
     </div>
 
-    <div class="form-group-mop">
+    <div class="form-group">
         <label for="price">Price of Mop: *</label>
         <input type="text" class="form-control" id="price" name="price" required>
     </div>
 
-    <div class="form-group-mop">
+    <div class="form-group">
         <label for="days">MOP Days: *</label>
         <input type="number" class="form-control" id="days" name="days" required>
     </div>
 
-    <div class="form-group-mop">
-        <label for="days">Agent Commission Amount: *</label>
-        <input type="number" class="form-control" id="commission" name="commission" placeholder="Commession of Sales Agent" required>
+    <div class="form-group">
+        <label for="spotcash">Spot Cash: *</label>
+        <input type="number" class="form-control" id="spotcash" name="spotcash" required>
     </div>
 
-    <div class="form-group-mop">
-        <label for="days">No. Of Effective Installment Commission : *</label>
-        <input type="number" class="form-control" id="moc" name="moc" placeholder = " Limit No. of Installment Commission " required>
+    <div class="form-group">
+        <label for="commission">Agent Commission Amount: *</label>
+        <input type="number" class="form-control" id="commission" name="commission" placeholder="Commission of Sales Agent" required>
     </div>
 
-    <div class="form-group-mop">
+    <div class="form-group">
+        <label for="moc">No. Of Effective Installment Commission: *</label>
+        <input type="number" class="form-control" id="moc" name="moc" placeholder="Limit No. of Installment Commission" required>
+    </div>
+
+    <div class="form-group">
         <label for="status">Status:</label>
         <select class="form-control" id="status" name="status">
-            <option value="promo">Beneficiary</option>
-            <option value="primary">Claimants</option>
+            <option value="BENEFICIARY">Beneficiary</option>
+            <option value="CLAIMANTS">Claimants</option>
         </select>
     </div>
 
     <div class="btn-container">
-        <button type="button" class="btn btn-success" onclick="savemop()">Create</button>
+        <button type="submit" class="btn btn-success">Create</button>
         <button type="button" id="closeButton" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
     </div>
-</form>
+        </div>
+
+  
+        
+      </form>
+    </div>
+  </div>
+</div>
 
 
- 
 
 
 

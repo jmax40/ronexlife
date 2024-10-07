@@ -32,10 +32,9 @@ $member_id = isset($_GET['pin']) ? $_GET['pin'] : '';
 // Escape the member_id to prevent SQL injection
 $member_id = $conn->real_escape_string($member_id);
 
-
 // Assuming $member_id is defined
 // SQL query to find the member(s)
-$sql = "SELECT * FROM payment WHERE coordinator = '$member_id' " ;
+$sql = "SELECT * FROM payment WHERE coordinator = '$member_id' ";
 $result = $conn->query($sql);
 
 // Array to store all transactions

@@ -25,25 +25,29 @@
 </style>
 
 <body>
-  <div class="sidebar close">
+
+
+
+
+<div class="sidebar close">
     <div class="logo-details">
-      <i class='bx bxl-c-plus-plus'></i>
-      <span class="logo_name">Ronex Life</span>
+ <i> <img src="../img/icons/leaf.ico" alt="Map Icon" style="width: 40px; height: 40px;">  </i>
+      <span class="logo_name" >Ronex Life</span>
     </div>
     <ul class="nav-links">
       <li>
         <a href="dashboard.php">
           <i class='bx bx-grid-alt' ></i>
-          <span class="link_name" href="dashboard.php" >Dashboard</span>
+          <span class="link_name" href="index.php" >Dashboard</span>
         </a>
         <ul class="sub-menu blank">
-        <li><a class="link_name" href="dashboard.php">Dashboard</a></li>
+        <li><a class="link_name" href="index.php">Dashboard</a></li>
         </ul>
       </li>
       <li>
         <div class="iocn-link">
           <a href="#">
-            <i class='bx bx-collection' ></i>
+          <i class='bx bx-group'></i>
             <span class="link_name">Members</span>
           </a>
           <i class='bx bxs-chevron-down arrow' ></i>
@@ -58,7 +62,7 @@
       <li>
         <div class="iocn-link">
           <a href="#">
-            <i class='bx bx-collection' ></i>
+          <i class='bx bx-package'></i>
             <span class="link_name">Products</span>
           </a>
           <i class='bx bxs-chevron-down arrow' ></i>
@@ -73,7 +77,7 @@
       <li>
         <div class="iocn-link">
           <a href="#">
-            <i class='bx bx-book-alt' ></i>
+          <i class='bx bx-building'></i>
             <span class="link_name">Branch</span>
           </a>
           <i class='bx bxs-chevron-down arrow' ></i>
@@ -81,38 +85,15 @@
         <ul class="sub-menu">
           <li><a class="link_name" href="#">Branch</a></li>
           <li><a href="branchinfo.php">Info</a></li>
-          <li><a href="branchperformance.php">Performance</a></li>
           <li><a href="branchmember.php">Members</a></li>
+          <li><a href="branchperformance.php">Performance</a></li>
+         
         </ul>
       </li>
-      <li>
-        <a href="#">
-          <i class='bx bx-pie-chart-alt-2' ></i>
-          <span class="link_name">Analytics</span>
-        </a>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="#">Analytics</a></li>
-        </ul>
-      </li>
+     
   
-      <li>
-        <a href="#">
-          <i class='bx bx-compass' ></i>
-          <span class="link_name">Explore</span>
-        </a>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="#">Explore</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="#">
-          <i class='bx bx-history'></i>
-          <span class="link_name">History</span>
-        </a>
-        <ul class="sub-menu blank">
-          <li><a class="link_name" href="#">History</a></li>
-        </ul>
-      </li>
+     
+
       <li>
         <a href="#">
           <i class='bx bx-cog' ></i>
@@ -123,6 +104,8 @@
         </ul>
       </li>
       <li>
+
+
     <div class="profile-details">
       <div class="profile-content">
         <!--<img src="image/profile.jpg" alt="profileImg">-->
@@ -136,6 +119,8 @@
   </li>
 </ul>
   </div>
+
+ 
   <section class="home-section">
     <div class="home-content">
       <i class='bx bx-menu' ></i>
@@ -165,36 +150,25 @@
 
 <br>
 <br>
-    <table>
-    <thead>
-        <tr>
-            <th>CN</th>
-            <th>Name</th>
-            <th>Address</th>
-            <th>MOP</th>
-            <th>Effective Date</th>
-            <th>Status</th>
-            <th>Agent</th>
-            <th></th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        <!-- Replace the content below with your actual data -->
-        <tr>
-            <td>123</td>
-            <td>John Doe</td>
-            <td>123 Main St</td>
-            <td>Credit Card</td>
-            <td>2024-01-27</td>
-            <td>Active</td>
-            <td>Agent Smith</td>
-            <td><button id="tableicon"><img src="../img/icons/edit.ico" alt="Edit Icon" width="25" height="25" ></button></td>
-            <td><button id="tableicon"><img src="../img/icons/delete.ico" alt="Delete Icon" width="25" height="25" ></button></td>
-        </tr>
-        <!-- Add more rows as needed -->
-    </tbody>
-</table>
+
+<div class="centered">
+    <form action="trans/productmember_chart.php" method="POST">
+        <label for="id">Start Date:</label>
+        <input class="searchmember" type="date" id="startdate" name="startdate"> <br>
+
+
+ <label for="id">End Date:</label>
+        <input class="searchmember" type="date" id="enddate" name="enddate"> <br>
+
+        <br> <!-- Add a line break -->
+        <br>
+        <center><button type="submit">Generate</button></center>
+        <br>
+        <center><button type="submit">Download XML</button></center>
+    </form>
+</div>
+
+
   </section>
 
   <div id="overlay" class="overlay">

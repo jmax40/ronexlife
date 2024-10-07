@@ -4,7 +4,7 @@
 
 
 <?php
-include_once '../process/foreach_transaction.php';
+include_once '../process/foreach_transaction_transaction.php';
 
 // Your code here...
 ?>
@@ -20,19 +20,18 @@ include_once '../process/foreach_transaction.php';
     <link rel="stylesheet" href="../search.css"> <!-- Correct if 'search.css' is in the same directory as your HTML file -->
     <link rel="stylesheet" href="../style2.css"> <!-- Correct if 'style2.css' is in the same directory as your HTML file -->
     <link rel="stylesheet" href="../style.css"> <!-- Moves up one directory, then into 'CSS' folder for 'style.css' -->
+    <link rel="stylesheet" href="../CSS/Style.css">
 
 
-
-
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Boxiocns CDN Link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-wvfXpqpZZVQGK6q3SN5GnvJFrbg3Io9gWxBjVlqMYkg7J1J7XdbnHJdT9K3bNkN" crossorigin="anonymous">
 
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-    
+
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+
    
     </head>
 <style> 
@@ -43,10 +42,6 @@ include_once '../process/foreach_transaction.php';
 </style>
 
 <body>
-
-
-
-
 
 
 
@@ -144,6 +139,7 @@ include_once '../process/foreach_transaction.php';
 
 
 
+
   <section class="home-section">
     <div class="home-content">
       <i class='bx bx-menu' ></i>
@@ -166,7 +162,6 @@ include_once '../process/foreach_transaction.php';
     <div class="date-time">
         <p>DATE: <span id="date"><?php echo htmlspecialchars($day); ?> - <?php echo htmlspecialchars($month); ?> - <?php echo htmlspecialchars($year); ?></span></p>
         <p>TIME: <span id="time"><?php echo htmlspecialchars($time); ?></span></p>
-        <p>DELAYED DAYS: <span id="time"><?php echo htmlspecialchars($distantdate); ?></span></p>
         
     </div>
 
@@ -203,22 +198,22 @@ include_once '../process/foreach_transaction.php';
 
 
 
- 
- 
-<div class="titlehead">
 
-<h1>Transaction Information<h1> 
-</div>
-<div class="indented-line"></div>
-<br>
-<div class="inline-buttons">
+ 
+    <div class="titlehead">
 
-<div class="input-container">
-<input type="text" id="searchInput" placeholder="Search">
-<img src="../../img/icons/search.ico" alt="Search Icon" class="search-icon">
+    <h1>Transaction Information<h1> 
 </div>
-<button class="inline-button" id="addButton">Add Payment<img src="../../img/icons/add.ico" alt="Add Icon" width="30" height="30"></button>
-<button class="inline-button" id="excelButton">Report<img src="../../img/icons/excel.ico" alt="Excel Icon" width="30" height="30"></button>
+    <div class="indented-line"></div>
+    <br>
+    <div class="inline-buttons">
+  
+    <div class="input-container">
+  <input type="text" id="searchInput" placeholder="Search">
+  <img src="../../img/icons/search.ico" alt="Search Icon" class="search-icon">
+</div>
+
+  <button class="inline-button" id="excelButton">Report<img src="../../img/icons/excel.ico" alt="Edit Icon" width="30" height="30" ></i></button>
 </div>
 
 
@@ -236,95 +231,74 @@ include_once '../process/foreach_transaction.php';
 
 
 <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
-<select id="pageSelect" style="margin-left: 5%; min-width: 50px; max-width: 150px;"></select>
+    <select id="pageSelect" style="margin-left: 5%; min-width: 50px; max-width: 150px;"></select>
 </div>
-
+ 
 
 
 <table id="ttable"> 
-<thead>
-    <tr>
-        <th>Effective Date</th>
-        <th>Next Payment</th>
-        <th>Or Number</th>
-        <th>Ins. Number</th>
-        <th>Product</th>
-        <th>Payment</th>
-        <th>Aging</th>
-        <th>Comm</th>
-        <th>Ncomm</th>
-        <th>Balance</th>
-        <th>Delete</th>
-        <th>Receipt</th>
-    </tr>
-</thead>
-<tbody>
-    <?php if (!empty($transactions)): ?>
-        <?php foreach ($transactions as $transaction): ?>
-            <tr>
-                <td><?php echo htmlspecialchars($transaction['effectdate']); ?></td>
-                <td><?php echo htmlspecialchars($transaction['duedate']); ?></td>
-                <td><?php echo htmlspecialchars($transaction['ornumber']); ?></td>
-                <td><?php echo htmlspecialchars($transaction['installment']); ?></td>
-                <td><?php echo htmlspecialchars($transaction['product']); ?></td>
-                <td><?php echo htmlspecialchars($transaction['amount']); ?></td>
-                <td><?php echo htmlspecialchars($transaction['aging']); ?></td>
-                <td><?php echo htmlspecialchars($transaction['comm']); ?></td>
-                <td><?php echo htmlspecialchars($transaction['ncomm']); ?></td>
-                <td><?php echo htmlspecialchars($transaction['balance']); ?></td>
-                <td>
-                    <a href="delete_transaction.php?id=<?php echo htmlspecialchars($transaction['id']); ?>&idmember=<?php echo htmlspecialchars($transaction['idmember']); ?>&amount=<?php echo htmlspecialchars($transaction['amount']); ?>" class="delete-link" onclick="return confirm('Are you sure you want to delete this transaction?');">
-                        <img src="../../img/icons/delete.ico" alt="Delete Icon" width="30" height="30">
-                    </a>
-                </td>
-                <td>
-                    <a href="#">
-                        <img src="../../img/icons/receipt.ico" alt="Receipt Icon" width="30" height="30">
-                    </a>
-                </td>
-            </tr>
-        <?php endforeach; ?>
-    <?php else: ?>
+    <thead>
         <tr>
-            <td colspan="12">No transactions found for this member.</td>
+            <th>Effective Date</th>
+            <th>Next Payment</th>
+            <th>Or Number</th>
+            <th>Ins. Number</th>
+            <th>Product</th>
+            <th>Payment</th>
+            <th>Aging</th>
+            <th>Comm</th>
+            <th>Ncomm</th>
+            <th>Balance</th>
+            <th>Delete</th>
+            <th>Receipt</th>
         </tr>
-    <?php endif; ?>
-</tbody>
+    </thead>
+    <tbody>
+        <?php if (!empty($transactions)): ?>
+            <?php foreach ($transactions as $transaction): ?>
+                <tr>
+                    <td><?php echo htmlspecialchars($transaction['effectdate']); ?></td>
+                    <td><?php echo htmlspecialchars($transaction['duedate']); ?></td>
+                    <td><?php echo htmlspecialchars($transaction['ornumber']); ?></td>
+                    <td><?php echo htmlspecialchars($transaction['installment']); ?></td>
+                    <td><?php echo htmlspecialchars($transaction['product']); ?></td>
+                    <td><?php echo htmlspecialchars($transaction['amount']); ?></td>
+                    <td><?php echo htmlspecialchars($transaction['aging']); ?></td>
+                    <td><?php echo htmlspecialchars($transaction['comm']); ?></td>
+                    <td><?php echo htmlspecialchars($transaction['ncomm']); ?></td>
+                    <td><?php echo htmlspecialchars($transaction['balance']); ?></td>
+                    <td>
+                        <a href="delete_transaction.php?id=<?php echo htmlspecialchars($transaction['id']); ?>&idmember=<?php echo htmlspecialchars($transaction['idmember']); ?>&amount=<?php echo htmlspecialchars($transaction['amount']); ?>" class="delete-link" onclick="return confirm('Are you sure you want to delete this transaction?');">
+                            <img src="../../img/icons/delete.ico" alt="Delete Icon" width="30" height="30">
+                        </a>
+                    </td>
+                    <td>
+                        <a href="#">
+                            <img src="../../img/icons/receipt.ico" alt="Receipt Icon" width="30" height="30">
+                        </a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <tr>
+                <td colspan="12">No transactions found for this member.</td>
+            </tr>
+        <?php endif; ?>
+    </tbody>
 </table>
 
 
 
-     <div style="display: flex; justify-content: center; align-items: center;">
+         <div style="display: flex; justify-content: center; align-items: center;">
 <button id="prevButton" disabled style="margin-right: 10px; border: none; border-radius: 50%; width: 40px; height: 40px; background-color: gray; color: white;">
-        <i class="fas fa-arrow-left"></i>
-    </button>
-    <button id="nextButton" style="border: none; border-radius: 50%; width: 40px; height: 40px; background-color: gray; color: white;">
-        <i class="fas fa-arrow-right"></i>
-    </button>
-    </div>
-
-
-
-
-</section>
-
-
-
-
-
-
-
-
-</div>
-</div>
-</div>
-
-
+            <i class="fas fa-arrow-left"></i>
+        </button>
+        <button id="nextButton" style="border: none; border-radius: 50%; width: 40px; height: 40px; background-color: gray; color: white;">
+            <i class="fas fa-arrow-right"></i>
+        </button>
+        </div>
 
  
-
-
-
 
 
   </section>
@@ -332,111 +306,6 @@ include_once '../process/foreach_transaction.php';
 
 
 
-  </div>
-  </div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <div id="overlay" class="overlay">
-  <div class="modalv2">
-    <div class="modal-content">
-      <center><h1>Payment Information</h1></center>
-      
-      <form method="post" action="insert_payment.php" enctype="multipart/form-data">
-        <div class="modal-layer">
-          <input type="text" class="form-control" value="<?php echo htmlspecialchars($member_data['pin']); ?>" name="idmember" required>
-
-          <div class="form-group">
-            <label for="product">OR number: *</label>
-            <input type="text" class="form-control" id="pin" name="ornumber" required>
-          </div>
-
-
-
-<div class="form-group">
-            <label for="installment">Installment: *</label>
-            <input type="number" class="form-control" value="1" id="installment" name="installment" required>
-        </div>
-
-
-
-
-        <div class="form-group">
-            <input type="date" class="form-control" value="<?php echo htmlspecialchars($effectdate); ?>"  id="effectdate" name="effectdate" required>
-        </div>
-    
-
-
-    <div class="form-group">
-            <label for="nextduedate">Next DueDate: *</label>
-            <input type="text" class="form-control" value="<?php echo htmlspecialchars($effectdate); ?>"  id="nextduedate" name="duedate" required>
-        </div>
-
-    
- 
-        <div class="form-group">
-        <label for="price">Aging*</label>
-    
-            <input type="text" class="form-control" value="<?php echo htmlspecialchars($distantdate); ?>"  id="aging" name="aging" required>
-        </div>
-
-
-
-
-        
-        <div class="form-group">
-        <label for="price">Total payment: *</label>
-    
-            <input type="text" class="form-control" value="<?php echo $total_amount; ?>"  id="partial_payment" name="partial_payment" required>
-        </div>
-
-        
-
-
-        <div class="form-group">
-        <label for="price">All Installment: *</label>
-    
-            <input type="text" class="form-control" value="<?php echo $total_installment; ?>"  id="moc" name="moc" required>
-        </div>
-
-
-
-
-
-
-          <div class="form-group">
-            <label for="price">Price: *</label>
-            <input type="text" class="form-control" value="<?php echo htmlspecialchars($member_data['price']); ?>" id="price" name="payment" required readonly>
-          </div>
-        
-        
-
-       
-
-        <br><br>
-        <div class="btn-container">
-          <button type="submit" class="btn btn-success" id="checkout">Pay Now</button>
-          <button type="button" id="closeButton" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
 
 
 
@@ -444,6 +313,28 @@ include_once '../process/foreach_transaction.php';
     </div>
   </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -475,6 +366,7 @@ include_once '../process/foreach_transaction.php';
             updateEffectDate();
         });
     </script>
+
 
 
 

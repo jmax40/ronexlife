@@ -4,7 +4,7 @@
 
 
 <?php
-include_once '../process/foreach_transaction_staff.php';
+include_once '../process/foreach_transaction_branchperformance_chart.php';
 
 // Your code here...
 ?>
@@ -22,21 +22,71 @@ include_once '../process/foreach_transaction_staff.php';
     <link rel="stylesheet" href="../style.css"> <!-- Moves up one directory, then into 'CSS' folder for 'style.css' -->
     <link rel="stylesheet" href="../CSS/Style.css">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <!-- Boxiocns CDN Link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-wvfXpqpZZVQGK6q3SN5GnvJFrbg3Io9gWxBjVlqMYkg7J1J7XdbnHJdT9K3bNkN" crossorigin="anonymous">
 
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     
+
+
+
+ <!-- Include jQuery -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<!-- Include Raphael.js (Morris.js dependency) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.3.0/raphael.min.js"></script>
+
+<!-- Include Morris.js -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+
+
 
    
     </head>
 <style> 
 
+
+
+
+.container {
+            display: flex;  /* Flexbox layout to align divs inline */
+            justify-content: space-between; /* Optional: space between the two divs */
+            border: 1px solid black;
+            padding: 10px;
+            margin: 30px;
+        }
+
+
+        .table-container {
+            display: flex;  /* Flexbox layout to align divs inline */
+            justify-content: space-between; /* Optional: space between the two divs */
+            border: 1px solid black;
+            padding: 5px;
+            margin: 5px;
+        }
+
+        .inline-div {
+            flex: 1; /* Make both divs take up equal space */
+            border: 1px solid blue;
+            padding: 10px;
+            margin: 5px;
+        }
+
+
+
+
+
+        
 
 
 
@@ -51,7 +101,7 @@ include_once '../process/foreach_transaction_staff.php';
 
 <div class="sidebar close">
     <div class="logo-details">
-    <i> <img src="../../img/icons/leaf.ico" alt="Map Icon" style="width: 40px; height: 40px;">  </i>
+ <i> <img src="../img/icons/leaf.ico" alt="Map Icon" style="width: 40px; height: 40px;">  </i>
       <span class="logo_name" >Ronex Life</span>
     </div>
     <ul class="nav-links">
@@ -144,7 +194,8 @@ include_once '../process/foreach_transaction_staff.php';
 
 
 
-  
+
+
   <section class="home-section">
     <div class="home-content">
       <i class='bx bx-menu' ></i>
@@ -167,7 +218,6 @@ include_once '../process/foreach_transaction_staff.php';
     <div class="date-time">
         <p>DATE: <span id="date"><?php echo htmlspecialchars($day); ?> - <?php echo htmlspecialchars($month); ?> - <?php echo htmlspecialchars($year); ?></span></p>
         <p>TIME: <span id="time"><?php echo htmlspecialchars($time); ?></span></p>
- 
         
     </div>
 
@@ -206,20 +256,18 @@ include_once '../process/foreach_transaction_staff.php';
 
 
  
- 
-<div class="titlehead">
-
-<h1>Transaction Information<h1> 
-</div>
-<div class="indented-line"></div>
-<br>
-<div class="inline-buttons">
-
-<div class="input-container">
+    <div class="titlehead">
 
 </div>
+    <div class="indented-line"></div>
 
-<button class="inline-button" id="excelButton">Report<img src="../../img/icons/chart.ico" alt="Excel Icon" width="30" height="30"></button>
+  
+    <div class="input-container">
+
+</div>
+</div>
+
+
 </div>
 
 
@@ -229,85 +277,33 @@ include_once '../process/foreach_transaction_staff.php';
 <br>
 
 
-<br>
 
 
 
 
 
 
-<div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
-<select id="pageSelect" style="margin-left: 5%; min-width: 50px; max-width: 150px;"></select>
+
+
+<h1>Sales Performance<h1>
+<div class="container">
+
+<div id="donutchart" style="height: 300px; width: 200px; background-color: lightblue; padding: 5px;"></div>
+<div id="barchart" style="height: 300px; width: 100%; background-color: black; padding: 5px;"></div>
+
 </div>
 
 
 
-<table id="ttable"> 
-<thead>
-    <tr>
-        <th>Effective Date</th>
-        <th>Next Payment</th>
-        <th>Or Number</th>
-        <th>Ins. Number</th>
-        <th>Product</th>
-        <th>Payment</th>
-        <th>Aging</th>
-        <th>Comm</th>
-        <th>Ncomm</th>
-        <th>Balance</th>
-        <th>Delete</th>
-        <th>Receipt</th>
-    </tr>
-</thead>
-<tbody>
-    <?php if (!empty($transactions)): ?>
-        <?php foreach ($transactions as $transaction): ?>
-            <tr>
-                <td><?php echo htmlspecialchars($transaction['effectdate']); ?></td>
-                <td><?php echo htmlspecialchars($transaction['duedate']); ?></td>
-                <td><?php echo htmlspecialchars($transaction['ornumber']); ?></td>
-                <td><?php echo htmlspecialchars($transaction['installment']); ?></td>
-                <td><?php echo htmlspecialchars($transaction['product']); ?></td>
-                <td><?php echo htmlspecialchars($transaction['amount']); ?></td>
-                <td><?php echo htmlspecialchars($transaction['aging']); ?></td>
-                <td><?php echo htmlspecialchars($transaction['comm']); ?></td>
-                <td><?php echo htmlspecialchars($transaction['ncomm']); ?></td>
-                <td><?php echo htmlspecialchars($transaction['balance']); ?></td>
-                <td>
-                    <a href="delete_transaction.php?id=<?php echo htmlspecialchars($transaction['id']); ?>&idmember=<?php echo htmlspecialchars($transaction['idmember']); ?>&amount=<?php echo htmlspecialchars($transaction['amount']); ?>" class="delete-link" onclick="return confirm('Are you sure you want to delete this transaction?');">
-                        <img src="../../img/icons/delete.ico" alt="Delete Icon" width="30" height="30">
-                    </a>
-                </td>
-                <td>
-                    <a href="#">
-                        <img src="../../img/icons/receipt.ico" alt="Receipt Icon" width="30" height="30">
-                    </a>
-                </td>
-            </tr>
-        <?php endforeach; ?>
-    <?php else: ?>
-        <tr>
-            <td colspan="12">No transactions found for this member.</td>
-        </tr>
-    <?php endif; ?>
-</tbody>
-</table>
 
 
+<h1>Product Performance<h1>
+<div class="container">
 
-     <div style="display: flex; justify-content: center; align-items: center;">
-<button id="prevButton" disabled style="margin-right: 10px; border: none; border-radius: 50%; width: 40px; height: 40px; background-color: gray; color: white;">
-        <i class="fas fa-arrow-left"></i>
-    </button>
-    <button id="nextButton" style="border: none; border-radius: 50%; width: 40px; height: 40px; background-color: gray; color: white;">
-        <i class="fas fa-arrow-right"></i>
-    </button>
-    </div>
+<div id="donutchart3" style="height: 300px; width: 200px; background-color: lightblue; padding: 5px;"></div>
+<div id="line-chart" style="height: 300px; width: 100%; background-color: black; padding: 5px;"></div>
 
-
-
-
-</section>
+</div>
 
 
 
@@ -315,6 +311,177 @@ include_once '../process/foreach_transaction_staff.php';
 
 
 
+<script>
+// Get the branch totals data from PHP
+var branchTotals = <?php echo $jsonBranchTotals; ?>;
+
+// Prepare the data for Morris.js
+var morrisData = [];
+for (var branch in branchTotals) {
+    if (branchTotals.hasOwnProperty(branch)) {
+        morrisData.push({
+            branch: branch,
+            total: branchTotals[branch] // Total members for each branch
+        });
+    }
+}
+
+// Create a Morris bar chart
+new Morris.Bar({
+    element: 'barchart', // The ID of the element in which to draw the chart
+    data: morrisData, // Use the prepared data for the bar chart
+    xkey: 'branch', // The key for the x-axis (branch names)
+    ykeys: ['total'], // The key for the y-axis (total members)
+    labels: ['Total Members'], // Label for the ykeys
+    barColors: ['#0b62a4', '#7a92a3', '#4da74d', '#d9534f', '#5bc0de'], // Custom colors for the bars
+    xLabelAngle: 60 // Rotate x-axis labels for better readability
+});
+</script>
+
+
+
+
+
+
+
+
+
+<script>
+// Get the transactions data from PHP
+var transactions = <?php echo $jsonTransactions; ?>;
+
+// Extract all unique product names from the transactions for ykeys
+var products = [];
+transactions.forEach(function (transaction) {
+    Object.keys(transaction).forEach(function (key) {
+        if (key !== 'date' && !products.includes(key)) {
+            products.push(key);
+        }
+    });
+});
+
+// Prepare the data for Morris.js
+var morrisData = transactions.map(function (transaction) {
+    var entry = { date: transaction.date };
+    products.forEach(function (product) {
+        entry[product] = transaction[product] || 0; // Set to 0 if product does not exist for the date
+    });
+    return entry;
+});
+
+// Initialize Morris Line Chart
+new Morris.Line({
+    // ID of the element in which to draw the chart.
+    element: 'line-chart',
+    data: morrisData,
+    xkey: 'date',
+    ykeys: products,
+    labels: products,
+    xLabels: 'day',
+    dateFormat: function (x) {
+        var date = new Date(x);
+        return date.toDateString();
+    },
+
+    // Styling options
+    lineColors: ['#0b62a4', '#7a92a3', '#4da74d', '#d9534f', '#5bc0de'], // Add more colors as necessary
+    lineWidth: 2,
+    hideHover: 'auto'
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+// Create a Morris Donut chart
+new Morris.Donut({
+    element: 'donutchart', // The ID of the element in which to draw the chart
+    data: [
+        { label: 'Month 1', value: 50 },
+        { label: 'Month 2', value: 25 },
+        { label: 'Month 3', value: 15 },
+        { label: 'Month 4', value: 10 }
+    ],
+    colors: ['#0b62a4', '#7A92A3', '#4da74d', '#afd8f8'], // Colors for each section
+    formatter: function (y) { return y + "%" } // Custom label formatting
+});
+
+
+
+
+new Morris.Donut({
+    element: 'donutchart3', // The ID of the element in which to draw the chart
+    data: [
+        { label: 'Product 1', value: 50 },
+        { label: 'Product 2', value: 25 },
+        { label: 'Product 3', value: 15 },
+        { label: 'Product 4', value: 10 }
+    ],
+    colors: ['#0b62a4', '#7A92A3', '#4da74d', '#afd8f8'], // Colors for each section
+    formatter: function (y) { return y + "%" } // Custom label formatting
+});
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  </section>
+
+
+
+
+
+  
 
 
 
@@ -326,57 +493,6 @@ include_once '../process/foreach_transaction_staff.php';
 
 
 
-<script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const installmentInput = document.getElementById('installment');
-            const effectDateInput = document.getElementById('nextduedate');
-
-            let initialDate = new Date(effectDateInput.value); // Store initial date
-
-            function updateEffectDate() {
-                const installment = parseInt(installmentInput.value, 10);
-                
-                if (!isNaN(installment)) {
-                    // Calculate new date based on installment value
-                    const daysToAdd = 30 * installment;
-                    let newDate = new Date(initialDate);
-                    newDate.setDate(newDate.getDate() + daysToAdd);
-                    
-                    // Update effect date input
-                    effectDateInput.value = newDate.toISOString().split('T')[0];
-                }
-            }
-
-            installmentInput.addEventListener('input', updateEffectDate);
-
-            // Initial setup to set date when page loads
-            updateEffectDate();
-        });
-    </script>
-
-
-
-
-<script>
-    document.getElementById('installment').addEventListener('input', function() {
-        var installmentInput = document.getElementById('installment');
-        var installment = parseFloat(installmentInput.value) || 0;
-
-        // Prevent negative values
-        if (installment < 0) {
-            installment = 0;
-            installmentInput.value = installment; // Set the value back to zero
-        }
-
-        var originalPrice = <?php echo htmlspecialchars($member_data['price']); ?>;
-        var total = installment * originalPrice;
-        
-        document.getElementById('price').value = total.toFixed(2); // Display result with two decimal places
-    });
-
-    // Trigger input event on page load to set the initial price based on default installment value
-    document.getElementById('installment').dispatchEvent(new Event('input'));
-</script>
 
 
 
@@ -386,7 +502,6 @@ include_once '../process/foreach_transaction_staff.php';
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="../pyscript/script.js"></script>
 <script src="../pyscript/add.js"></script>
-<script src="../pyscript/table_script.js"></script>
 
 </body>
 </html>
