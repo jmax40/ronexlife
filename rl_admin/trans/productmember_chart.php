@@ -249,18 +249,21 @@ include_once '../process/foreach_transaction_member_chart.php';
             <th>Middlename</th>
             <th>Lastname</th>
             <th>Coordinator</th>
+            <th>Branch</th>
         </tr>
     </thead>
     <tbody>
         <?php if (!empty($transactions)): ?>
             <?php foreach ($transactions as $transaction): ?>
                 <tr>
+                  
                     <td><?php echo htmlspecialchars($transaction['product']); ?></td>
                     <td><?php echo htmlspecialchars($transaction['idmember']); ?></td>
                     <td><?php echo htmlspecialchars($transaction['fname']); ?></td>
                     <td><?php echo htmlspecialchars($transaction['mname']); ?></td>
                     <td><?php echo htmlspecialchars($transaction['lname']); ?></td>
                     <td><?php echo htmlspecialchars($transaction['coordinator']); ?></td>
+                    <td><?php echo htmlspecialchars($transaction['branch']); ?></td>
                 </tr>
             <?php endforeach; ?>
         <?php else: ?>

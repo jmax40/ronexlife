@@ -241,6 +241,7 @@ include_once '../process/foreach_transaction_transaction.php';
         <tr>
             <th>Effective Date</th>
             <th>Next Payment</th>
+            <th>Client Name</th>
             <th>Or Number</th>
             <th>Ins. Number</th>
             <th>Product</th>
@@ -249,7 +250,7 @@ include_once '../process/foreach_transaction_transaction.php';
             <th>Comm</th>
             <th>Ncomm</th>
             <th>Balance</th>
-            <th>Delete</th>
+
             <th>Receipt</th>
         </tr>
     </thead>
@@ -257,26 +258,28 @@ include_once '../process/foreach_transaction_transaction.php';
         <?php if (!empty($transactions)): ?>
             <?php foreach ($transactions as $transaction): ?>
                 <tr>
-                    <td><?php echo htmlspecialchars($transaction['effectdate']); ?></td>
-                    <td><?php echo htmlspecialchars($transaction['duedate']); ?></td>
-                    <td><?php echo htmlspecialchars($transaction['ornumber']); ?></td>
-                    <td><?php echo htmlspecialchars($transaction['installment']); ?></td>
-                    <td><?php echo htmlspecialchars($transaction['product']); ?></td>
-                    <td><?php echo htmlspecialchars($transaction['amount']); ?></td>
-                    <td><?php echo htmlspecialchars($transaction['aging']); ?></td>
-                    <td><?php echo htmlspecialchars($transaction['comm']); ?></td>
-                    <td><?php echo htmlspecialchars($transaction['ncomm']); ?></td>
-                    <td><?php echo htmlspecialchars($transaction['balance']); ?></td>
-                    <td>
-                        <a href="delete_transaction.php?id=<?php echo htmlspecialchars($transaction['id']); ?>&idmember=<?php echo htmlspecialchars($transaction['idmember']); ?>&amount=<?php echo htmlspecialchars($transaction['amount']); ?>" class="delete-link" onclick="return confirm('Are you sure you want to delete this transaction?');">
-                            <img src="../../img/icons/delete.ico" alt="Delete Icon" width="30" height="30">
-                        </a>
-                    </td>
-                    <td>
-                        <a href="#">
-                            <img src="../../img/icons/receipt.ico" alt="Receipt Icon" width="30" height="30">
-                        </a>
-                    </td>
+                <td><?php echo htmlspecialchars($transaction['effectdate']); ?></td>
+<td><?php echo htmlspecialchars($transaction['duedate']); ?></td>
+<td><?php echo htmlspecialchars($transaction['fullname']); ?></td>            
+<td><?php echo htmlspecialchars($transaction['ornumber']); ?></td>
+<td><?php echo htmlspecialchars($transaction['installment']); ?></td>
+<td><?php echo htmlspecialchars($transaction['product']); ?></td>
+<td><?php echo htmlspecialchars($transaction['amount']); ?></td>
+<td><?php echo htmlspecialchars($transaction['aging']); ?></td>
+<td><?php echo htmlspecialchars($transaction['comm']); ?></td>
+<td><?php echo htmlspecialchars($transaction['ncomm']); ?></td>
+<td><?php echo htmlspecialchars($transaction['balance']); ?></td>         
+<td>
+    <a href="soa.php?pin=<?php echo htmlspecialchars($transaction['idmember'], ENT_QUOTES, 'UTF-8'); ?>" target="_blank">
+        <img src="../../img/icons/receipt.ico" alt="Receipt Icon" width="30" height="30">
+    </a>
+</td>
+
+
+
+
+
+
                 </tr>
             <?php endforeach; ?>
         <?php else: ?>

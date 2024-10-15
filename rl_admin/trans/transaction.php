@@ -6,9 +6,10 @@
 <?php
 include_once '../process/foreach_transaction.php';
 
+
+
 // Your code here...
 ?>
-
 
 
 <!DOCTYPE html>
@@ -218,6 +219,39 @@ include_once '../process/foreach_transaction.php';
 <img src="../../img/icons/search.ico" alt="Search Icon" class="search-icon">
 </div>
 <button class="inline-button" id="addButton">Add Payment<img src="../../img/icons/add.ico" alt="Add Icon" width="30" height="30"></button>
+<!-- Button to generate report -->
+
+
+<!-- Button to generate report -->
+<!-- Button to generate report -->
+<button class="inline-button" id="excelButton" 
+    data-pin="<?php echo htmlspecialchars($member_data['pin'], ENT_QUOTES, 'UTF-8'); ?>" 
+    target="_blank" aria-label="Generate report">
+    Report <img src="../../img/icons/receipt.ico" alt="Excel Icon" width="30" height="30">
+</button>
+
+
+<script>
+document.getElementById('excelButton').addEventListener('click', function() {
+    // Get the value from the button's data attribute
+    var pin = this.getAttribute('data-pin');
+
+    // Construct the URL with the query parameter safely
+    var url = 'soa.php?pin=' + encodeURIComponent(pin);
+
+    // Open the constructed URL in a new tab
+    window.open(url, '_blank');
+});
+
+
+
+
+
+
+</script>
+
+
+
 <button class="inline-button" id="excelButton">Report<img src="../../img/icons/excel.ico" alt="Excel Icon" width="30" height="30"></button>
 </div>
 
@@ -229,6 +263,9 @@ include_once '../process/foreach_transaction.php';
 
 
 <br>
+
+
+
 
 
 
@@ -255,7 +292,6 @@ include_once '../process/foreach_transaction.php';
         <th>Ncomm</th>
         <th>Balance</th>
         <th>Delete</th>
-        <th>Receipt</th>
     </tr>
 </thead>
 <tbody>
@@ -276,12 +312,7 @@ include_once '../process/foreach_transaction.php';
                     <a href="delete_transaction.php?id=<?php echo htmlspecialchars($transaction['id']); ?>&idmember=<?php echo htmlspecialchars($transaction['idmember']); ?>&amount=<?php echo htmlspecialchars($transaction['amount']); ?>" class="delete-link" onclick="return confirm('Are you sure you want to delete this transaction?');">
                         <img src="../../img/icons/delete.ico" alt="Delete Icon" width="30" height="30">
                     </a>
-                </td>
-                <td>
-                    <a href="#">
-                        <img src="../../img/icons/receipt.ico" alt="Receipt Icon" width="30" height="30">
-                    </a>
-                </td>
+                </td>           
             </tr>
         <?php endforeach; ?>
     <?php else: ?>

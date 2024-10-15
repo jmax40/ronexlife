@@ -160,6 +160,17 @@
  <label for="id">End Date:</label>
         <input class="searchmember" type="date" id="enddate" name="enddate"> <br>
 
+
+        <label for="product">Select Product:</label>
+<select class="searchmember" id="product" name="product">
+    <option value="">-- Select a Product --</option>
+    <option value="product1">Product 1</option>
+    <option value="product2">Product 2</option>
+    <option value="product3">Product 3</option>
+    <!-- Add more options as needed -->
+</select> <br>
+
+
         <br> <!-- Add a line break -->
         <br>
         <center><button type="submit">Generate</button></center>
